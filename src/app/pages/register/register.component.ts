@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient) { }
   //
   ngOnInit() {
-    this.authSalesforce();
+    this.getAPI();
   }
 
   get currentLead() {
@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
       'https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Name+FROM+Lead',
       {
         headers: {
-          'Authorization': 'Bearer 00D09000007iY11!AREAQJ2emevFtXJupD1gmvAyZ_gEqvWEl66yoio_dETg8aevKWR6schhCv84hPe91f0ZfIBlcd3jQCdH0noC6VSE9Af2HB7K',
+          'Authorization': 'Bearer 00D09000007iY11!AREAQLifpL7K9EjV4lRuZia60C9qkEmOzt5Es6K5tKwF03QRhsQQzshKbk5slrtrghQBP04EIwTcvOLgrPCT_kZ5ts3.qj0L',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET'
         }
