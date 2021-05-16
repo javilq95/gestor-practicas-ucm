@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient) { }
   //
   ngOnInit() {
-    this.getAPI();
+    this.authSalesforce();
   }
 
   get currentLead() {
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
 
   public async authSalesforce() {
 
-    let body = {
+    var body = {
       'username': 'prsucm@gmail.com',
       'password': 'eTiMAlM8QqtnXZSisrr8Uroge',
       'grant_type': 'password',
@@ -33,9 +33,16 @@ export class RegisterComponent implements OnInit {
       'client_secret': 'A447A22720FC315D2338C4066AA5785F56B4BFAFAAE22870E7CDE6203241F76B'
     };
 
+    var formData: any = new FormData();
+    formData.append("username", "prsucm@gmail.com");
+    formData.append("password", "eTiMAlM8QqtnXZSisrr8Uroge");
+    formData.append("grant_type", "password");
+    formData.append("client_id", "3MVG9SOw8KERNN08z_oVBiDovu6mJpSAiAXITiJ4ViMs8DPEh_PPXnf9sdNhCyT.TGM9TN7ucJxfIB_mJk4D9");
+    formData.append("client_secret", "A447A22720FC315D2338C4066AA5785F56B4BFAFAAE22870E7CDE6203241F76B");
+
     return await this.http.post<any>(
       'https://login.salesforce.com/services/oauth2/token',
-      body,
+      formData,
       {
         headers: {
           'Access-Control-Allow-Origin': '*',
