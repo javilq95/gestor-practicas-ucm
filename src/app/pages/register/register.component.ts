@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Lead } from 'src/app/salesforce/Lead.model';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient) { }
   //
   ngOnInit() {
-    this.authSalesforce();
+    
   }
 
   get currentLead() {
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       'https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Name+FROM+Lead',
       {
         headers: {
-          'Authorization': 'Bearer 00D09000007iY11!AREAQLifpL7K9EjV4lRuZia60C9qkEmOzt5Es6K5tKwF03QRhsQQzshKbk5slrtrghQBP04EIwTcvOLgrPCT_kZ5ts3.qj0L',
+          'Authorization': 'Bearer 00D09000007iY11!AREAQHfP26qVEytMe7Kg.9trKT29_GXUhARcYaveObcNUGdPlgzj5eHvdNosL81vvbH2nwqRhWFSj9u_ITd0BZO6sa6MB6MC',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET'
         }
