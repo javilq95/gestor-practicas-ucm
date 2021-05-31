@@ -1,36 +1,34 @@
 import { HttpClient} from "@angular/common/http";
+import { accessToken } from "./auth";
 export class Lead {
-
-    public http: HttpClient;
-    
+    public s;
     constructor(
-        public name: string,
+        public firstName: string,
+        public lastName: string,
         public email: string,
-        public password: string
+        public password: string,
+        private http: HttpClient
     ){}
 
     public async insertLeadSF() {
 
-        var secondBody = {
-            'FirstName':'Test1', 
-            'LastName': 'Test1', 
-            'Company': 'Test1' 
-        };
         var body = {
-            'Name': this.name,
+            'FirstName':this.firstName, 
+            'LastName': this.lastName, 
+            'Company': 'UCM',
             'Email': this.email
-          };
-        this.http.post<any>(
+        };
+        return this.http.post<any>(
             'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
-            secondBody,
+            body,
             {
               headers: {
-                'Authorization': 'Bearer 00D09000007iY11!AREAQIfkFyoJBgpfMchxfhxkUDZka7E.QzFF3G_R9SMsyT3odoI6oLvW1d8g4McpQqAcMRvwDKOJmwuv4Io0c1LXu5ULm8Fy',
+                'Authorization': accessToken,
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'POST',
                 'Content-Type': 'application/json'
               }
-            }).toPromise().then();
+            }).toPromise().then(x => this.s = JSON.stringify(x));
     }
 
     get currentLead() {

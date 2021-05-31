@@ -44,7 +44,15 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nombre" type="text" name="name" id="name" [(ngModel)]=model.name required>
+                <input class="form-control" placeholder="Nombre" type="text" name="firstName" id="name" [(ngModel)]=model.firstName required>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-bold-right"></i></span>
+                </div>
+                <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.lastName required>
               </div>
             </div>
             <div class="form-group">
@@ -63,17 +71,7 @@
                 <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.password required>
               </div>
             </div>
-            <div class="form-group">
-              <div class="input-group input-group-alternative">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-badge"></i></span>
-                </div>
-                <select name="Tipo" style="color:Grey;">
-                  <option value ="Alumno">Alumno</option>
-                  <option value ="Empresa">Empresa</option>
-                </select> 
-              </div>
-            </div>
+            
             <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
             <div class="row my-4">
               <div class="col-12">
@@ -86,15 +84,15 @@
               </div>
             </div>
             <div class="text-center">
-              <button type="button" (click)="model.insertLeadSF()" class="btn btn-primary mt-4">Crear cuenta</button>
+              <button type="button" (click)=model.insertLeadSF() class="btn btn-primary mt-4">Crear cuenta</button>
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="s">
+  <div *ngIf="model.s">
     <h2> Modelo: </h2>
-    {{s}}
+    {{model.s}}
   </div>
 </div>
