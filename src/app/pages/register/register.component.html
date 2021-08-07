@@ -39,14 +39,16 @@
             <small>O regístrate con credenciales</small>
           </div>
           <form role="form">
+
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                  <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
                 <input class="form-control" placeholder="Nombre" type="text" name="firstName" id="name" [(ngModel)]=model.firstName required>
               </div>
             </div>
+
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -55,6 +57,7 @@
                 <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.lastName required>
               </div>
             </div>
+
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -63,6 +66,7 @@
                 <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=model.email required>
               </div>
             </div>
+
             <div class="form-group">
               <div class="input-group input-group-alternative">
                 <div class="input-group-prepend">
@@ -71,7 +75,43 @@
                 <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.password required>
               </div>
             </div>
-            
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-badge"></i></span>
+                </div>
+                <input class="form-control" placeholder="NIF" type="text" name="nif" id="nif" [(ngModel)]=model.nif required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
+                </div>
+                <input class="form-control" placeholder="Teléfono" type="text" name="phone" id="phone" [(ngModel)]=model.phone required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-spaceship"></i></span>
+                </div>
+                <input class="form-control" placeholder="Área" type="text" name="area" id="area" [(ngModel)]=model.area required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" placeholder="Titulación" type="text" name="titulation" id="titulation" [(ngModel)]=model.titulation required>
+              </div>
+            </div>
+
             <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
             <div class="row my-4">
               <div class="col-12">
