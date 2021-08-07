@@ -1,6 +1,6 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
-export class Lead {
+export class Contact {
     public s;
     constructor(
         public firstName: string,
@@ -12,10 +12,11 @@ export class Lead {
         public titulation: string,
         public phone: string,
         public mobilePhone: string,
+        public mark: string,
         private http: HttpClient
     ){}
 
-    public async insertLeadSF() {
+    public async insertContactSF() {
 
         var body = {
             'FirstName':this.firstName, 
@@ -26,8 +27,7 @@ export class Lead {
             'Area__c': this.area,
             'Titulation__c': this.titulation,
             'Phone': this.phone,
-            'MobilePhone': this.mobilePhone,
-            'Company': 'Universidad Complutense de Madrid',
+            'MobilePhone': this.mobilePhone
         };
         return this.http.post<any>(
             'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
@@ -42,7 +42,7 @@ export class Lead {
             }).toPromise().then(x => this.s = JSON.stringify(x));
     }
 
-    get currentLead() {
+    get currentContact() {
         return JSON.stringify(this);
     }
 }
