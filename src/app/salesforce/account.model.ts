@@ -14,6 +14,7 @@ export class Account {
         public numberOfEmployees: number,
         public accountNumber: string,
         public phone: string,
+        public billingCity: string,
         public logo: string,
         private http: HttpClient
     ){}
@@ -32,6 +33,7 @@ export class Account {
             'AccountNumber': this.accountNumber,
             'NumberOfEmployees': this.numberOfEmployees,
             'Phone': this.phone,
+            'BillingCity': this.billingCity,
             'Logo__c': this.logo
         };
         return this.http.post<any>(

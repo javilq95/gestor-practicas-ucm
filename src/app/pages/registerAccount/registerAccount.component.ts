@@ -9,7 +9,7 @@ import { HttpClient} from "@angular/common/http";
 })
 export class RegisterAccountComponent implements OnInit {
 
-  model = new Account('', '', '', '', '', '', null, '', null, '', '', '', this.http);
+  model = new Account('', '', '', '', '', '', null, '', null, '', '', '', '', this.http);
 
   constructor(private http: HttpClient) { }
   //

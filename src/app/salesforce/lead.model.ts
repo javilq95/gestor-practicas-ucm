@@ -11,6 +11,7 @@ export class Lead {
         public area: string,
         public titulation: string,
         public phone: string,
+        public city: string,
         private http: HttpClient
     ){}
 
@@ -25,6 +26,7 @@ export class Lead {
             'Area__c': this.area,
             'Titulation__c': this.titulation,
             'Phone': this.phone,
+            'City': this.city,
             'Company': 'Universidad Complutense de Madrid',
         };
         return this.http.post<any>(
