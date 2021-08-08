@@ -22,15 +22,15 @@ export class Account {
 
         var body = {
             'Name':this.name,
-            'Email': this.email,
+            'Email__c': this.email,
             'Password__c': this.password,
             'Description': this.description,
             'Type': this.type,
             'Industry': this.industry,
-            'AnnualRevenue': this.description,
+            'AnnualRevenue': this.annualRevenue,
             'Website': this.website,
             'AccountNumber': this.accountNumber,
-            'NumberOfEmployees': this.accountNumber,
+            'NumberOfEmployees': this.numberOfEmployees,
             'Phone': this.phone,
             'Logo__c': this.logo
         };
