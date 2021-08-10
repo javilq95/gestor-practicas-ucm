@@ -21,21 +21,21 @@
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
         <div class="card-header bg-transparent pb-5">
-          <div class="text-muted text-center mt-2 mb-3"><small>Iniciar sesión con</small></div>
+          <div class="text-muted text-center mt-2 mb-3"><small>Iniciar sesión como</small></div>
           <div class="btn-wrapper text-center">
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
-              <span class="btn-inner--text">Github</span>
+              <span class="btn-inner--icon"><img src="assets/img/icons/common/student.png"></span>
+              <span class="btn-inner--text">Alumno</span>
             </a>
             <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
-              <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
-              <span class="btn-inner--text">Google</span>
+              <span class="btn-inner--icon"><img src="assets/img/icons/common/business.png"></span>
+              <span class="btn-inner--text">Empresa</span>
             </a>
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>O iniciar sesión con credenciales</small>
+            <small>Rellenar con los credenciales del alumno</small>
           </div>
           <form role="form">
             <div class="form-group mb-3">
@@ -78,34 +78,3 @@
   </div>
 </div>
 
-<apex:page showHeader="false" sidebar="false" controller="ApexAngularDemo">
-<html ng-app="demoApp">
-<head>
-	<title>Demo Page</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script type="text/javascript">
-	var demoApp = angular.module('demoApp',[]);
-	demoApp.controller('demoController', function($scope) {
-		$scope.data = JSON.parse('{!data}');
-	});
-</script>
-</head>
-<body ng-controller="demoController">
-	<label>Accounts</label>
-	<table class="table table-striped table-bordered">
-		<tr>
-			<td>Id</td>
-			<td>Name</td>
-		</tr>
-		<tr ng-repeat="entry in data">
-			<td>{{entry.recordId}}</td>
-			<td>{{entry.recordName}}</td>
-		</tr>
-	</table>
-</body>
-
-</html>	
-</apex:page>
