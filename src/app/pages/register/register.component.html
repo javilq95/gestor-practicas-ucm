@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-bold-right"></i></span>
                 </div>
-                <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.lastName required>
+                <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.lastName required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=model.email required>
+                <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=model.email required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.password required>
+                <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.password required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-badge"></i></span>
                 </div>
-                <input class="form-control" placeholder="NIF" type="text" name="nif" id="nif" [(ngModel)]=model.nif required>
+                <input class="form-control" placeholder="NIF" type="text" name="nif" id="nif" [(ngModel)]=model.nif required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -110,7 +110,7 @@
               <select class="custom-select" id="inputGroupSelect01" name="area" [(ngModel)]=model.area required>
                 <option value="Artes y Humanidades">Artes y Humanidades</option>
                 <option value="Ingenierias y Arquitectura">Ingenierías y Arquitectura</option>
-              </select>
+              </select><p style="color:red;">*</p>
             </div>
 
             <div class="input-group mb-3">
@@ -120,7 +120,7 @@
               <select class="custom-select" id="inputGroupSelect02"  name="titulation" [(ngModel)]=model.titulation required>
                 <option value="Grado en Bellas Artes">Grado en Bellas Artes</option>
                 <option value="Grado en Ingenieria Informática">Grado en Ingeniería Informática</option>
-              </select>
+              </select><p style="color:red;">*</p>
             </div>
 
             <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>

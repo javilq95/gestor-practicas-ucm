@@ -45,7 +45,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nombre" type="text" name="name" id="name" [(ngModel)]=model.name required>
+                <input class="form-control" placeholder="Nombre" type="text" name="name" id="name" [(ngModel)]=model.name required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" name="emailA" id="emailA" [(ngModel)]=model.email required>
+                <input class="form-control" placeholder="Email" type="email" name="emailA" id="emailA" [(ngModel)]=model.email required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Clave" type="password" name="passwordA" id="passwordA" [(ngModel)]=model.password required>
+                <input class="form-control" placeholder="Clave" type="password" name="passwordA" id="passwordA" [(ngModel)]=model.password required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-badge"></i></span>
                 </div>
-                <input class="form-control" placeholder="Número de Identificación" type="text" name="accountNumber" id="accountNumber" [(ngModel)]=model.accountNumber required>
+                <input class="form-control" placeholder="Número de Identificación" type="text" name="accountNumber" id="accountNumber" [(ngModel)]=model.accountNumber required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -126,7 +126,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                 </div>
-                <input class="form-control" placeholder="Número de empleados" type="text" name="numberOfEmployees" id="numberOfEmployees" [(ngModel)]=model.numberOfEmployees required>
+                <input class="form-control" placeholder="Número de empleados" type="number" name="numberOfEmployees" id="numberOfEmployees" [(ngModel)]=model.numberOfEmployees required>
               </div>
             </div>
 
@@ -138,7 +138,7 @@
                 <option value="Prácticas Curriculares">Prácticas Curriculares</option>
                 <option value="Prácticas Extracurriculares">Prácticas Extracurriculares</option>
                 <option value="Ambas">Ambas</option>
-              </select>
+              </select><p style="color:red;">*</p>
             </div>
 
             <div class="input-group mb-3">
@@ -149,7 +149,7 @@
                 <option value="Agricola">Agrícola</option>
                 <option value="Aministracion">Administración</option>
                 <option value="Industrial">Industrial</option>
-              </select>
+              </select><p style="color:red;">*</p>
             </div>
 
             <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
