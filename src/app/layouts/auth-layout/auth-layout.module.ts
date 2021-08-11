@@ -6,6 +6,7 @@ import { AuthLayoutRoutes } from './auth-layout.routing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginComponent } from '../../pages/login/login.component';
+import { LoginAccountComponent } from '../../pages/loginAccount/loginAccount.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { RegisterAccountComponent } from '../../pages/registerAccount/registerAccount.component';
 @NgModule({
@@ -17,6 +18,7 @@ import { RegisterAccountComponent } from '../../pages/registerAccount/registerAc
   ],
   declarations: [
     LoginComponent,
+    LoginAccountComponent,
     RegisterComponent,
     RegisterAccountComponent
   ]
