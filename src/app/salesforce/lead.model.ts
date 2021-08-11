@@ -1,7 +1,8 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 export class Lead {
-    public s;
+    public s: string;
+    public id: string;
     constructor(
         public firstName: string,
         public lastName: string,
@@ -44,5 +45,19 @@ export class Lead {
 
     get currentLead() {
         return JSON.stringify(this);
+    }
+
+    public async loginLeadSF (loginEmail:string, loginPassword:string){
+
+        var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FirstName+LastName+Email+Password__c+NIF__c+Area__c+Titulation__c+Phone+City+Company+FROM+Lead+WHERE+Email='"+loginEmail+"'+Password__c='"+loginPassword+"'";
+        return await this.http.get<any>(
+            endPoint,
+            {
+              headers: {
+                'Authorization': accessToken,
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET'
+              }
+            }).toPromise().then(x => this.s = JSON.stringify(x));
     }
 }
