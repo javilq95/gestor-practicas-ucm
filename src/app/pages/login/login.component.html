@@ -43,7 +43,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email">
+                <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=modelEmail required>
               </div>
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Contraseña" type="password">
+                <input class="form-control" placeholder="Contraseña" type="password" name="password" id="password" [(ngModel)]=modelPassword required>
               </div>
             </div>
             <div class="custom-control custom-control-alternative custom-checkbox">
@@ -61,7 +61,7 @@
               </label>
             </div>
             <div class="text-center">
-              <button type="button" class="btn btn-primary my-4">Iniciar sesión</button>
+              <button type="button"  (click)="model.loginLeadSF(modelEmail, modelPassword)" class="btn btn-primary my-4">Iniciar sesión</button>
             </div>
           </form>
         </div>
@@ -75,6 +75,10 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="model.s">
+    <h2> Modelo: </h2>
+    {{model.s}}
   </div>
 </div>
 

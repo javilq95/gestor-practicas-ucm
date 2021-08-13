@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Lead } from 'src/app/salesforce/Lead.model';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +8,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  constructor() {}
+
+  public modelEmail = '';
+  public modelPassword = '';
+  model = new Lead('', '', '', '','', '', '', '', '', this.http);
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
   }

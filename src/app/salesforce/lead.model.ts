@@ -49,8 +49,9 @@ export class Lead {
 
     public async loginLeadSF (loginEmail:string, loginPassword:string){
 
-        var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FirstName+LastName+Email+Password__c+NIF__c+Area__c+Titulation__c+Phone+City+Company+FROM+Lead+WHERE+Email='"+loginEmail+"'+Password__c='"+loginPassword+"'";
-        return await this.http.get<any>(
+        var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+FirstName+,+LastName+,+Email+,+Password__c+,+NIF__c+,+Area__c+,+Titulation__c+,+Phone+,+City+,+Company+FROM+Lead+WHERE+Email='"+loginEmail+"'+AND+Password__c='"+loginPassword+"'";
+
+        await this.http.get<any>(
             endPoint,
             {
               headers: {
@@ -59,5 +60,19 @@ export class Lead {
                 'Access-Control-Allow-Methods': 'GET'
               }
             }).toPromise().then(x => this.s = JSON.stringify(x));
+
+            var parsed = JSON.parse(this.s);
+
+            if (parsed.totalSize == 1){
+              this.firstName = parsed.records[0].FirstName;
+              this.lastName = parsed.records[0].LastName;
+              this.email = parsed.records[0].Email;
+              this.password = parsed.records[0].Password__c;
+              this.nif = parsed.records[0].NIF__c;
+              this.area = parsed.records[0].Area__c;
+              this.titulation = parsed.records[0].Titulation__c;
+              this.phone = parsed.records[0].Phone;
+              this.city = parsed.records[0].City;
+            }
     }
 }
