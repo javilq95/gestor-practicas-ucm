@@ -5,7 +5,7 @@ export class Contact {
     public id: string = null;
     public error: string = null;
     constructor(
-        private http: HttpClient,
+        public http: HttpClient,
         public firstName: string = null,
         public lastName: string = null,
         public email: string = null,

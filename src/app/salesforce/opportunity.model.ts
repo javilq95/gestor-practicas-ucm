@@ -3,7 +3,7 @@ import { accessToken } from "./auth";
 export class Opportunity {
     public s;
     constructor(
-        private http: HttpClient,
+        public http: HttpClient,
         public name: string = null,
         public stageName: string = null,
         public closeDate: string = null,

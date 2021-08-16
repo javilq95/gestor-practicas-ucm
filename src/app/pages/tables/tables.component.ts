@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Account } from 'src/app/salesforce/Account.model';
 
 @Component({
   selector: 'app-tables',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TablesComponent implements OnInit {
 
-  constructor() { }
+  model = new Account(this.http);
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.model.id = '0010900000aPU7SAAW';
+    this.model.getOpportunities();
   }
 
 }
