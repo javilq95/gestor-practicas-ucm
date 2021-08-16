@@ -15,11 +15,15 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
+import { HttpClient } from '@angular/common/http';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+
+//private http: HttpClient;
+//model = new Lead('', '', '', '','', '', '', '', '', this.http);
 
 if (environment.production) {
   enableProdMode();

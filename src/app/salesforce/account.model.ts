@@ -1,22 +1,24 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 export class Account {
-    public s;
+    public s: string = null;
+    public id: string = null;
+    public error: string = null;
     constructor(
-        public name: string,
-        public email: string,
-        public password: string,
-        public description: string,
-        public type: string,
-        public industry: string,
-        public annualRevenue: number,
-        public website: string,
-        public numberOfEmployees: number,
-        public accountNumber: string,
-        public phone: string,
-        public billingCity: string,
-        public logo: string,
-        private http: HttpClient
+        private http: HttpClient,
+        public name: string = null,
+        public email: string = null,
+        public password: string = null,
+        public description: string = null,
+        public type: string= null,
+        public industry: string = null,
+        public annualRevenue: number = null,
+        public website: string = null,
+        public numberOfEmployees: number = null,
+        public accountNumber: string = null,
+        public phone: string = null,
+        public billingCity: string = null,
+        public logo: string = null
     ){}
 
     public async insertAccountSF() {
@@ -48,6 +50,42 @@ export class Account {
               }
             }).toPromise().then(x => this.s = JSON.stringify(x));
     }
+
+    public async loginAccountSF (loginEmail:string, loginPassword:string){
+
+        var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Email__c='"+loginEmail+"'+AND+Password__c='"+loginPassword+"'+AND+Verification__c=true";
+  
+        await this.http.get<any>(
+              endPoint,
+              {
+                headers: {
+                  'Authorization': accessToken,
+                  'Access-Control-Allow-Origin': '*',
+                  'Access-Control-Allow-Methods': 'GET'
+                }
+              }).toPromise().then(x => this.s = JSON.stringify(x));
+  
+            var parsed = JSON.parse(this.s);
+  
+          if (parsed.totalSize == 1){
+            this.id = parsed.records[0].Id;
+            this.name = parsed.records[0].Name;
+            this.email = parsed.records[0].Email__c;
+            this.password = parsed.records[0].Password__c;
+            this.phone = parsed.records[0].Phone;
+            this.description = parsed.records[0].Description;
+            this.type = parsed.records[0].Type;
+            this.industry = parsed.records[0].Industry;
+            this.annualRevenue = parsed.records[0].AnnualRevenue;
+            this.website = parsed.records[0].Website;
+            this.accountNumber = parsed.records[0].AccountNumber;
+            this.numberOfEmployees = parsed.records[0].NumberOfEmployees;
+            this.billingCity = parsed.records[0].BillingCity;
+            this.logo = parsed.records[0].Logo__c;
+          }else{
+            this.error = "Error, los credenciales no son correctas o el alumno está verificado";
+          }
+      }
 
     get currentAccount() {
         return JSON.stringify(this);

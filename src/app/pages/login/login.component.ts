@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public modelEmail = '';
   public modelPassword = '';
-  model = new Lead('', '', '', '','', '', '', '', '', this.http);
+  model = new Lead(this.http);
 
   constructor(private http: HttpClient) {}
 

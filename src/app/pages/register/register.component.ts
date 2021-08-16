@@ -9,7 +9,7 @@ import { HttpClient} from "@angular/common/http";
 })
 export class RegisterComponent implements OnInit {
 
-  model = new Lead('', '', '', '','', '', '', '', '', this.http);
+  model = new Lead(this.http);
 
   public s;
 

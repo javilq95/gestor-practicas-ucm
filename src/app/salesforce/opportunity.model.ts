@@ -3,23 +3,23 @@ import { accessToken } from "./auth";
 export class Opportunity {
     public s;
     constructor(
-        public name: string,
-        public accountId: string,
-        public stageName: string,
-        public closeDate: string,
-        public type: string,
-        public amount: number,
-        public probability: number,
-        public weekDays: string,
-        public totalDays: number,
-        public startTime: string,
-        public endTime: string,
-        public startDate: string,
-        public endDate: string,
-        private http: HttpClient
+        private http: HttpClient,
+        public name: string = null,
+        public stageName: string = null,
+        public closeDate: string = null,
+        public type: string = null,
+        public amount: number = null,
+        public probability: number = null,
+        public weekDays: string = null,
+        public totalDays: number = null,
+        public startTime: string = null,
+        public endTime: string = null,
+        public startDate: string = null,
+        public endDate: string = null,
+        public accountId: string = null
     ){}
 
-    public async insertLeadSF() {
+    public async insertOpportunitySF() {
 
         var body = {
             'Name':this.name, 
@@ -49,7 +49,7 @@ export class Opportunity {
             }).toPromise().then(x => this.s = JSON.stringify(x));
     }
 
-    get currentLead() {
+    get currentOpportunity() {
         return JSON.stringify(this);
     }
 }
