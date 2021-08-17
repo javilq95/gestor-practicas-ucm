@@ -1,0 +1,151 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 100px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <span class="mask bg-gradient-danger opacity-8"></span>
+  <!-- Header container -->
+  <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white">¡Hola Adidas!</h1>
+        <p class="text-white mt-0 mb-5">A continuación podrás crear una nueva oferta de trabajo que se publicará automáticamente en nuestro sistema.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Datos de la Oferta</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a href="#!" class="btn btn-sm btn-primary">Crear Oferta</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form>
+            <h6 class="heading-small text-muted mb-4">Información de la oferta</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-name">Nombre de la oferta</label>
+                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre de la oferta">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-closedate">Fecha de cierre</label>
+                    <input type="date" id="input-email" class="form-control form-control-alternative" placeholder="Fecha de cierre">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">Tipo</label>
+                    <select class="custom-select" id="inputGroupSelect01" type="text" name="type" [(ngModel)]=model.type required>
+                      <ng-container *ngFor="let item of vTypes;let i=index">
+                        <option value="{{vTypes[i]}}">{{vTypes[i]}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-last-name">Área</label>
+                    <select class="custom-select" id="inputGroupSelect02" type="text" name="area" [(ngModel)]=model.area required>
+                      <ng-container *ngFor="let item of vAreas;let i=index">
+                        <option value="{{vAreas[i]}}">{{vAreas[i]}}</option>
+                      </ng-container>
+
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-first-name">Etapa</label>
+                    <select class="custom-select" id="inputGroupSelect03" type="text" name="stage" [(ngModel)]=model.stage required>
+                      <ng-container *ngFor="let item of vStages;let i=index">
+                        <option value="{{vStages[i]}}">{{vStages[i]}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <!-- Address -->
+            <h6 class="heading-small text-muted mb-4">Detalles de la práctica</h6>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-name">Fecha de Inicio</label>
+                    <input type="date" id="input-username" class="form-control form-control-alternative" placeholder="Nombre de la oferta">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-closedate">Fecha de Fin</label>
+                    <input type="date" id="input-finaldate" class="form-control form-control-alternative" placeholder="Fecha de cierre">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-name">Hora de Inicio</label>
+                    <input type="time" id="input-username" class="form-control form-control-alternative" placeholder="Hora de inicio">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-closedate">Hora de Fin</label>
+                    <input type="time" id="input-finaldate" class="form-control form-control-alternative" placeholder="Hora de fin">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-name">Total de Días / Semana</label>
+                    <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Total de Días / Semana">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-closedate">Días de la semana</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2">
+                      <option>Lunes</option>
+                      <option>Martes</option>
+                      <option>Miércoles</option>
+                      <option>Jueves</option>
+                      <option>Viernes</option>
+                      <option>Sábado</option>
+                      <option>Domingo</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-name">Salario (€)</label>
+                    <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Salario (€)">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

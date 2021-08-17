@@ -8,7 +8,7 @@ import { Account } from 'src/app/salesforce/Account.model';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  public dom;
+
   model = new Account(this.http);
 
   constructor(private http: HttpClient) { }
