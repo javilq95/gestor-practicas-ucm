@@ -108,8 +108,9 @@
                 <label class="input-group-text" for="inputGroupSelect01"><i class="ni ni-spaceship"></i>&nbsp;&nbsp;&nbsp;Área</label>
               </div>
               <select class="custom-select" id="inputGroupSelect01" name="area" [(ngModel)]=model.area required>
-                <option value="Artes y Humanidades">Artes y Humanidades</option>
-                <option value="Ingenierias y Arquitectura">Ingenierías y Arquitectura</option>
+                <ng-container *ngFor="let item of vAreas;let i=index">
+                  <option value="{{vAreas[i]}}">{{vAreas[i]}}</option>
+                </ng-container>
               </select><p style="color:red;">*</p>
             </div>
 
@@ -118,8 +119,9 @@
                 <label class="input-group-text" for="inputGroupSelect02"><i class="ni ni-hat-3"></i>&nbsp;&nbsp;&nbsp;Titulación</label>
               </div>
               <select class="custom-select" id="inputGroupSelect02"  name="titulation" [(ngModel)]=model.titulation required>
-                <option value="Grado en Bellas Artes">Grado en Bellas Artes</option>
-                <option value="Grado en Ingenieria Informatica">Grado en Ingeniería Informática</option>
+                <ng-container *ngFor="let item of vTitulations;let i=index">
+                  <option value="{{vTitulations[i]}}">{{vTitulations[i]}}</option>
+                </ng-container>
               </select><p style="color:red;">*</p>
             </div>
 

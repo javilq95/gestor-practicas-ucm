@@ -70,6 +70,8 @@ export class Account {
 
       var parsed = JSON.parse(this.s);
 
+      var src = parsed.records[0].Logo__c.substring(13,141);
+
       if (parsed.totalSize > 0){
         this.id = parsed.records[0].Id;
         this.name = parsed.records[0].Name;
@@ -84,10 +86,12 @@ export class Account {
         this.accountNumber = parsed.records[0].AccountNumber;
         this.numberOfEmployees = parsed.records[0].NumberOfEmployees;
         this.billingCity = parsed.records[0].BillingCity;
-        this.logo = parsed.records[0].Logo__c;
+        this.logo = src;
       }else{
         this.error = "Error, los credenciales no son correctas o el alumno está verificado";
       }
+
+      this.getOpportunities();
     }
 
     public async getOpportunities (){

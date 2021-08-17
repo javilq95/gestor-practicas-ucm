@@ -8,14 +8,13 @@ import { Account } from 'src/app/salesforce/Account.model';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-
+  public dom;
   model = new Account(this.http);
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.model.id = '0010900000aPU7SAAW';
-    this.model.getOpportunities();
+    this.model.loginAccountSF('adidaspruebaucm@gmail.com','clave7896');
   }
 
 }

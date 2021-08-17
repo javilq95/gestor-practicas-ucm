@@ -135,9 +135,9 @@
                 <label class="input-group-text" for="inputGroupSelect01"><i class="ni ni-hat-3"></i>&nbsp;&nbsp;&nbsp;Tipo</label>
               </div>
               <select class="custom-select" id="inputGroupSelect01" name="type" [(ngModel)]=model.type required>
-                <option value="Prácticas Curriculares">Prácticas Curriculares</option>
-                <option value="Prácticas Extracurriculares">Prácticas Extracurriculares</option>
-                <option value="Ambas">Ambas</option>
+                <ng-container *ngFor="let item of vTypes;let i=index">
+                  <option value="{{vTypes[i]}}">{{vTypes[i]}}</option>
+                </ng-container>
               </select><p style="color:red;">*</p>
             </div>
 
@@ -146,9 +146,9 @@
                 <label class="input-group-text" for="inputGroupSelect02"><i class="ni ni-chart-pie-35"></i>&nbsp;&nbsp;&nbsp;Sector</label>
               </div>
               <select class="custom-select" id="inputGroupSelect02"  name="industry" [(ngModel)]=model.industry required>
-                <option value="Agricola">Agrícola</option>
-                <option value="Aministracion">Administración</option>
-                <option value="Industrial">Industrial</option>
+                <ng-container *ngFor="let item of vIndustries;let i=index">
+                  <option value="{{vIndustries[i]}}">{{vIndustries[i]}}</option>
+                </ng-container>
               </select><p style="color:red;">*</p>
             </div>
 
