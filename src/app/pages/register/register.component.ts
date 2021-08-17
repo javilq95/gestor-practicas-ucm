@@ -19,8 +19,6 @@ export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient) { }
   //
   ngOnInit() {
-    //https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/Lead/picklist-values/012000000000000AAA/Titulation__c
-    //https://wam-dev-ed.my.salesforce.com/services/data/v42.0/sobjects/Lead/describe
     this.getAreas();
     this.getTitulations();
   }

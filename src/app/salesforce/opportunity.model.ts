@@ -16,6 +16,7 @@ export class Opportunity {
         public endTime: string = null,
         public startDate: string = null,
         public endDate: string = null,
+        public area: string = null,
         public accountId: string = null
     ){}
 
@@ -34,7 +35,8 @@ export class Opportunity {
             'StartTime__c': this.startTime,
             'EndTime__c': this.endTime,
             'StartDate__c': this.startDate,
-            'EndDate__c': this.endDate
+            'EndDate__c': this.endDate,
+            'Area__c': this.area
         };
         return this.http.post<any>(
             'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/opportunity',

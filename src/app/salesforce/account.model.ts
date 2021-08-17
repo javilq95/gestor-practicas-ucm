@@ -96,7 +96,7 @@ export class Account {
 
     public async getOpportunities (){
 
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+AccountId+FROM+Opportunity+WHERE+AccountId='"+this.id+"'";
+      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+AccountId='"+this.id+"'";
 
       await this.http.get<any>(
             endPoint,
@@ -127,6 +127,7 @@ export class Account {
                                                     parsed.records[_i].EndTime__c,
                                                     parsed.records[_i].StartDate__c,
                                                     parsed.records[_i].EndDate__c,
+                                                    parsed.records[_i].Area__c,
                                                     parsed.records[_i].AccountId);
         }
       }else{

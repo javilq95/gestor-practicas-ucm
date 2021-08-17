@@ -22,7 +22,7 @@
               <h3 class="mb-0">Datos de la Oferta</h3>
             </div>
             <div class="col-4 text-right">
-              <a href="#!" class="btn btn-sm btn-primary">Crear Oferta</a>
+              <a href="#!" (click)=model.insertOpportunitySF() class="btn btn-sm btn-primary">Crear Oferta</a>
             </div>
           </div>
         </div>
@@ -34,13 +34,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-name">Nombre de la oferta</label>
-                    <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre de la oferta">
+                    <input type="text" id="input-name" name="name" class="form-control form-control-alternative" placeholder="Nombre de la oferta" [(ngModel)]=model.name required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-closedate">Fecha de cierre</label>
-                    <input type="date" id="input-email" class="form-control form-control-alternative" placeholder="Fecha de cierre">
+                    <input type="date" id="input-type" name="closeDate" class="form-control form-control-alternative" placeholder="Fecha de cierre" [(ngModel)]=model.closeDate required>
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-first-name">Etapa</label>
-                    <select class="custom-select" id="inputGroupSelect03" type="text" name="stage" [(ngModel)]=model.stage required>
+                    <select class="custom-select" id="inputGroupSelect03" type="text" name="stage" [(ngModel)]=model.stageName required>
                       <ng-container *ngFor="let item of vStages;let i=index">
                         <option value="{{vStages[i]}}">{{vStages[i]}}</option>
                       </ng-container>
@@ -81,20 +81,20 @@
               </div>
             </div>
             <hr class="my-4" />
-            <!-- Address -->
+            <!-- Detalles -->
             <h6 class="heading-small text-muted mb-4">Detalles de la práctica</h6>
             <div class="pl-lg-4">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-name">Fecha de Inicio</label>
-                    <input type="date" id="input-username" class="form-control form-control-alternative" placeholder="Nombre de la oferta">
+                    <label class="form-control-label" for="input-startdate">Fecha de Inicio</label>
+                    <input type="date" id="input-startdate" name="name" class="form-control form-control-alternative" placeholder="Fecha de Inicio" [(ngModel)]=model.startDate required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-closedate">Fecha de Fin</label>
-                    <input type="date" id="input-finaldate" class="form-control form-control-alternative" placeholder="Fecha de cierre">
+                    <label class="form-control-label" for="input-enddate">Fecha de Fin</label>
+                    <input type="date" id="input-enddate" name="name" class="form-control form-control-alternative" placeholder="Fecha de cierre" [(ngModel)]=model.endDate required>
                   </div>
                 </div>
               </div>
@@ -102,13 +102,13 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-name">Hora de Inicio</label>
-                    <input type="time" id="input-username" class="form-control form-control-alternative" placeholder="Hora de inicio">
+                    <input type="time" id="input-startTime" name="startTime" class="form-control form-control-alternative" placeholder="Hora de inicio" [(ngModel)]=model.startTime required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-closedate">Hora de Fin</label>
-                    <input type="time" id="input-finaldate" class="form-control form-control-alternative" placeholder="Hora de fin">
+                    <input type="time" id="input-endTime" name="endTime" class="form-control form-control-alternative" placeholder="Hora de fin" [(ngModel)]=model.endTime required>
                   </div>
                 </div>
               </div>
@@ -116,20 +116,20 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-name">Total de Días / Semana</label>
-                    <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Total de Días / Semana">
+                    <input type="number" id="input-totalDays" name="totalDays" class="form-control form-control-alternative" placeholder="Total de Días / Semana" [(ngModel)]=model.totalDays required>
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="input-closedate">Días de la semana</label>
-                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                      <option>Lunes</option>
-                      <option>Martes</option>
-                      <option>Miércoles</option>
-                      <option>Jueves</option>
-                      <option>Viernes</option>
-                      <option>Sábado</option>
-                      <option>Domingo</option>
+                    <label class="form-control-label" for="input-weekDays">Días de la semana</label>
+                    <select multiple class="form-control" id="exampleFormControlSelect2" name="weekDays" [(ngModel)]=model.weekDays required>
+                      <option value="Lunes">Lunes</option>
+                      <option value="Martes">Martes</option>
+                      <option value="Miércoles">Miércoles</option>
+                      <option value="Jueves">Jueves</option>
+                      <option value="Viernes">Viernes</option>
+                      <option value="Sábado">Sábado</option>
+                      <option value="Domingo">Domingo</option>
                     </select>
                   </div>
                 </div>
@@ -138,13 +138,14 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-name">Salario (€)</label>
-                    <input type="number" id="input-username" class="form-control form-control-alternative" placeholder="Salario (€)">
+                    <input type="number" id="input-amount" name="amount" class="form-control form-control-alternative" placeholder="Salario (€)" [(ngModel)]=model.amount required>
                   </div>
                 </div>
               </div>
             </div>
           </form>
         </div>
+        {{model.weekDays}}
       </div>
     </div>
   </div>
