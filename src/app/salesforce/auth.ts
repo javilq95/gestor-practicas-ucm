@@ -1,2 +1,2 @@
-export var accessToken = "Bearer 00D09000007iY11!AREAQK9Yd_cTjBEJrJEa.1aoHXGvy8DWWPQJ_jA4Npewqq7AI9bxKIITl9ykX8sCwxlVbzdwXXvVvFe8CFUdIkt3rEs19jCt";
-export var currentType = "";
+export var accessToken = "Bearer 00D09000007iY11!AREAQLSJbtK0bIph7XPeAQQXt9KnHQjn1gqukB28i9F0ZsLhhjLptGkyaLEIFjAutRleLEMbxtqjIgCQo5pPkd6U73PfR0sh";
+export var currentType = "Lead";

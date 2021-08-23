@@ -26,6 +26,10 @@ export class NewOpportunityComponent implements OnInit {
     this.model.weekDays = "Lunes;Martes";
   }
 
+  public semicolon(commavalue: string){
+    return commavalue.replace('o','e');
+  }
+
   public async getAreas (){
 
     var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/Opportunity/picklist-values/012000000000000AAA/Area__c";
