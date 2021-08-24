@@ -1,3 +1,4 @@
+<div *ngIf="currentType==='Lead'">
 <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
@@ -92,7 +93,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="input-last-email">Email</label>
-                    <input type="email" id="input-email" class="form-control form-control-alternative" value="javi@gmail.com">
+                    <input type="email" id="input-email" class="form-control form-control-alternative" value="javi@gmail.com" disabled="disabled">
                   </div>
                 </div>
               </div>
@@ -154,3 +155,170 @@
     </div>
   </div>
 </div>
+</div>
+<div *ngIf="currentType==='Account'">
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">¡Hola Adidas!</h1>
+          <p class="text-white mt-0 mb-5">Esta es tu página de perfil. En ella podrás modificar casi todos los campos asociados a tu usuario de empresa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img src="assets/img/theme/student.png" class="rounded-circle">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="row">
+              <div class="col">
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h3>
+                Jessica Jones<span class="font-weight-light"></span>
+              </h3>
+              <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>Bucharest, Romania
+              </div>
+              <div class="h5 mt-4">
+                <i class="ni business_briefcase-24 mr-2"></i>Empresa
+              </div>
+              <div>
+                <i class="ni education_hat mr-2"></i>Universidad Complutense de Madrid
+              </div>
+              <hr class="my-4" />
+              <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Mi cuenta</h3>
+              </div>
+              <div class="col-4 text-right">
+                <a href="#!" class="btn btn-sm btn-primary">Guardar cambios</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">Información empresarial</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-name">Nombre</label>
+                      <input type="text" id="input-name" class="form-control form-control-alternative" value="Javiel">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-web">Sitio web</label>
+                      <input type="text" id="input-web" class="form-control form-control-alternative" value="www.google.es">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-cif">Número de la empresa</label>
+                      <input type="text" id="input-cif" class="form-control form-control-alternative" value="C4535GTTE">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Teléfono</label>
+                      <input type="text" id="input-phone" class="form-control form-control-alternative" value="902202122">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-type">Tipo</label>
+                      <select class="custom-select" id="inputGroupSelect02" type="text" name="type">
+                        <option selected>Ciencias de lo que sea</option>
+                        <ng-container *ngFor="let item of vTypes;let i=index">
+                          <option value="{{vTypes[i]}}">{{vTypes[i]}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-industry">Sector</label>
+                      <select class="custom-select" id="inputGroupSelect02" type="text" name="industry">
+                        <option selected>Ciencias de lo que sea</option>
+                        <ng-container *ngFor="let item of vIndustries;let i=index">
+                          <option value="{{vIndustries[i]}}">{{vIndustries[i]}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-city">Dirección</label>
+                      <input type="text" id="input-city" class="form-control form-control-alternative" value="Madrid">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Email</label>
+                      <input type="email" id="input-phone" class="form-control form-control-alternative" value="prueba@gmail.com" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-employees">Empleados</label>
+                      <input type="number" id="input-employees" class="form-control form-control-alternative" value="124">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-revenue">Ingresos anuales (€)</label>
+                      <input type="number" id="input-revenue" class="form-control form-control-alternative" value="7000000">
+                    </div>
+                  </div>
+                </div>
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-description">Descripción</label>
+                    <textarea rows="4" class="form-control form-control-alternative">Empresa dedicada a la pesca</textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  

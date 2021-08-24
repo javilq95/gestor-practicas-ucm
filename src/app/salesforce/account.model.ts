@@ -54,6 +54,35 @@ export class Account {
           }).toPromise().then(x => this.s = JSON.stringify(x));
     }
 
+    public async updateAccountSF(newName:string, newDescription:string, newType:string, newIndustry:string, newRevenue:number, newWebsite:string, newAccountNumber:string, newEmployees:number, newPhone:string, newCity:string) {
+
+      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v52.0/sobjects/Account/"+this.id;
+
+      var body = {
+          'Name':newName,
+          'Description': newDescription,
+          'Type': newType,
+          'Industry': newIndustry,
+          'AnnualRevenue': newRevenue,
+          'Website': newWebsite,
+          'AccountNumber': newAccountNumber,
+          'NumberOfEmployees': newEmployees,
+          'Phone': newPhone,
+          'BillingCity': newCity
+      };
+      return this.http.post<any>(
+          endPoint,
+          body,
+          {
+            headers: {
+              'Authorization': accessToken,
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'POST',
+              'Content-Type': 'application/json'
+            }
+          }).toPromise().then(x => this.s = JSON.stringify(x));
+    }
+
     public async loginAccountSF (loginEmail:string, loginPassword:string){
 
       var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Email__c='"+loginEmail+"'+AND+Password__c='"+loginPassword+"'+AND+Verification__c=true";

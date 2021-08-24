@@ -1,3 +1,4 @@
+<div *ngIf="currentType==='Lead'">
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
@@ -8,12 +9,12 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Empresa</h5>
-                  <span class="h2 font-weight-bold mb-0">{{model.name}}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Candidato</h5>
+                  <span class="h2 font-weight-bold mb-0">{{lead.firstName}} {{lead.lastName}}</span>
                 </div>
                 <div class="col-auto">
-                  <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
-                    <i class="fas fa-city"></i>
+                  <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                    <i class="fas fa-user-graduate"></i>
                   </div>
                 </div>
               </div>
@@ -25,11 +26,11 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Nº Ofertas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{model.totalOpportunities}}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-0">Ofertas inscritas</h5>
+                  <span class="h2 font-weight-bold mb-0">{{lead.totalOpportunities}}</span>
                 </div>
                 <div class="col-auto">
-                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                  <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
                     <i class="fas fa-briefcase"></i>
                   </div>
                 </div>
@@ -37,19 +38,35 @@
             </div>
           </div>
         </div>
-        <div><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-info">Nueva Oferta</a></div>
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">Ofertas abiertas</h5>
+                  <span class="h2 font-weight-bold mb-0">{{lead.totalOpportunitiesArea}}</span>
+                </div>
+                <div class="col-auto">
+                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                    <i class="fas fa-business-time"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 <!-- Page content -->
 <div class="container-fluid mt--7">
-  <!-- Dark table -->
+  <!-- TABLA OFERTAS INSCRITAS -->
   <div class="row mt-5">
     <div class="col">
       <div class="card bg-default shadow">
         <div class="card-header bg-transparent border-0">
-          <h3 class="text-white mb-0">Lista de Ofertas</h3>
+          <h3 class="text-white mb-0">Lista de Ofertas en las que estás inscrit@</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-dark table-flush">
@@ -58,61 +75,52 @@
                 <th scope="col">Nombre de la oferta</th>
                 <th scope="col">Importe</th>
                 <th scope="col">Etapa</th>
-                <th scope="col">Candidatos</th>
+                <th scope="col">Empresa</th>
                 <th scope="col">Avance</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let item of model.vOpportunities;let i=index">              
+              <ng-container *ngFor="let item of lead.vOpportunities;let i=index">              
               <tr>
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
                       <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
                     </a>
-                    <div *ngIf="model.totalOpportunities>0">
+                    <div *ngIf="lead.totalOpportunities>0">
                       <div class="media-body">
-                        <span class="mb-0 text-sm">{{model.vOpportunities[i].name}}</span>
+                        <span class="mb-0 text-sm">{{lead.vOpportunities[i].name}}</span>
                       </div>
                     </div>
                   </div>
                 </th>
-                  <td><div *ngIf="model.totalOpportunities>0">
-                    {{model.vOpportunities[i].amount}} €
+                  <td><div *ngIf="lead.totalOpportunities>0">
+                    {{lead.vOpportunities[i].amount}} €
                   </div></td>
                 <td>
-                  <div *ngIf="model.totalOpportunities>0">
+                  <div *ngIf="lead.totalOpportunities>0">
                   <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> {{model.vOpportunities[i].stageName}}
+                    <i class="bg-warning"></i> {{lead.vOpportunities[i].stageName}}
                   </span>
                   </div>
                 </td>
                 <td>
-                  <div class="avatar-group">
-                    <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                      <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
-                    </a>
-                    <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
-                      <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
-                    </a>
-                    <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
-                      <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
-                    </a>
-                    <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
-                      <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-                    </a>
+                  <div *ngIf="lead.totalOpportunities>0">
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> {{lead.vOpportunities[i].stageName}}
+                  </span>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex align-items-center">
-                    <div *ngIf="model.totalOpportunities>0">
-                    <span class="mr-2">{{model.vOpportunities[i].probability}}%</span>
+                    <div *ngIf="lead.totalOpportunities>0">
+                    <span class="mr-2">{{lead.vOpportunities[i].probability}}%</span>
                     </div>
-                    <div *ngIf="model.totalOpportunities>0">
+                    <div *ngIf="lead.totalOpportunities>0">
                     <div>
                       <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{model.vOpportunities[i].probability}}%;"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{lead.vOpportunities[i].probability}}%;"></div>
                       </div>
                       </div>
                     </div>
@@ -124,9 +132,8 @@
                       <i class="fas fa-ellipsis-v"></i>
                     </a>
                     <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Action</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Another action</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                      <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                      <a class="dropdown-item" href="javascript:void(0)">Desinscribirse</a>
                     </div>
                   </div>
                 </td>
@@ -134,8 +141,241 @@
             </ng-container>
             </tbody>
           </table>
+          <!-- TABLA OFERTAS POR ÁREA -->
+          <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">Lista de Ofertas abiertas en base a tu área</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-dark table-flush">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nombre de la oferta</th>
+                  <th scope="col">Importe</th>
+                  <th scope="col">Etapa</th>
+                  <th scope="col">Candidatos</th>
+                  <th scope="col">Avance</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of lead.vOpportunitiesArea;let i=index">              
+                <tr>
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                        <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
+                      </a>
+                      <div *ngIf="lead.totalOpportunitiesArea>0">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{lead.vOpportunitiesArea[i].name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                    <td><div *ngIf="lead.totalOpportunitiesArea>0">
+                      {{lead.vOpportunitiesArea[i].amount}} €
+                    </div></td>
+                  <td>
+                    <div *ngIf="lead.totalOpportunitiesArea>0">
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i> {{lead.vOpportunitiesArea[i].stageName}}
+                    </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="avatar-group">
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                      </a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div *ngIf="lead.totalOpportunitiesArea>0">
+                      <span class="mr-2">{{lead.vOpportunitiesArea[i].probability}}%</span>
+                      </div>
+                      <div *ngIf="lead.totalOpportunitiesArea>0">
+                      <div>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{lead.vOpportunitiesArea[i].probability}}%;"></div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <div ngbDropdown placement="bottom-right">
+                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                        <a class="dropdown-item" href="javascript:void(0)">Inscribirse</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+    {{lead.error}}
+  </div>
+</div>
+</div>
+<!-- ACCOUNT -->
+<div *ngIf="currentType==='Account'">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Empresa</h5>
+                    <span class="h2 font-weight-bold mb-0">{{model.name}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
+                      <i class="fas fa-city"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Nº Ofertas</h5>
+                    <span class="h2 font-weight-bold mb-0">{{model.totalOpportunities}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                      <i class="fas fa-briefcase"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-info">Nueva Oferta</a></div>
         </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- Dark table -->
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card bg-default shadow">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="text-white mb-0">Lista de Ofertas</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-dark table-flush">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Nombre de la oferta</th>
+                  <th scope="col">Importe</th>
+                  <th scope="col">Etapa</th>
+                  <th scope="col">Candidatos</th>
+                  <th scope="col">Avance</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let item of model.vOpportunities;let i=index">              
+                <tr>
+                  <th scope="row">
+                    <div class="media align-items-center">
+                      <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                        <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
+                      </a>
+                      <div *ngIf="model.totalOpportunities>0">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{model.vOpportunities[i].name}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                    <td><div *ngIf="model.totalOpportunities>0">
+                      {{model.vOpportunities[i].amount}} €
+                    </div></td>
+                  <td>
+                    <div *ngIf="model.totalOpportunities>0">
+                    <span class="badge badge-dot mr-4">
+                      <i class="bg-warning"></i> {{model.vOpportunities[i].stageName}}
+                    </span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="avatar-group">
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
+                      </a>
+                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
+                        <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                      </a>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <div *ngIf="model.totalOpportunities>0">
+                      <span class="mr-2">{{model.vOpportunities[i].probability}}%</span>
+                      </div>
+                      <div *ngIf="model.totalOpportunities>0">
+                      <div>
+                        <div class="progress">
+                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{model.vOpportunities[i].probability}}%;"></div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right">
+                    <div ngbDropdown placement="bottom-right">
+                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                        <i class="fas fa-ellipsis-v"></i>
+                      </a>
+                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                        <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                        <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                        <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
