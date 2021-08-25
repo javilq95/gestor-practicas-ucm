@@ -23,11 +23,6 @@ export class NewOpportunityComponent implements OnInit {
     this.getTypes();
     this.getStages();
     this.model.accountId = "0010900000d1biYAAQ";
-    this.model.weekDays = "Lunes;Martes";
-  }
-
-  public semicolon(commavalue: string){
-    return commavalue.replace('o','e');
   }
 
   public async getAreas (){

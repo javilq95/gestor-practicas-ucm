@@ -1,8 +1,8 @@
-<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 100px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
+<div class="header pb-8 pt-5 pt-lg-8" style="min-height: 100px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
   <!-- Header container -->
-  <div class="container-fluid d-flex align-items-center">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-lg-7 col-md-10">
         <h1 class="display-2 text-white">¡Hola Adidas!</h1>
@@ -11,16 +11,10 @@
     </div>
   </div>
 </div>
-<script>
-  function replace(){
-      //model.weekDays = semicolon(model.weekDays);
-      alert("PELIGROOOO");  
-  }
-</script>
 <div class="container-fluid mt--7">
   <div class="row">
 
-    <div class="col-xl-8 order-xl-1">
+    <div class="col-xl order-xl">
       <div class="card bg-secondary shadow">
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
@@ -28,7 +22,7 @@
               <h3 class="mb-0">Datos de la Oferta</h3>
             </div>
             <div class="col-4 text-right">
-              <a href="#!" (click)=model.insertOpportunitySF() class="btn btn-sm btn-primary">Crear Oferta</a>
+              <a (click)=model.insertOpportunitySF() class="btn btn-sm btn-primary">Crear Oferta</a>
             </div>
           </div>
         </div>

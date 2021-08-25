@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Account } from 'src/app/salesforce/Account.model';
 import { Lead } from 'src/app/salesforce/Lead.model';
 
@@ -10,14 +11,14 @@ import { Lead } from 'src/app/salesforce/Lead.model';
 })
 export class TablesComponent implements OnInit {
 
-  model = new Account(this.http);
+  model = new Account(this.http, this.sanitizer);
   lead = new Lead(this.http);
-  public currentType = "Lead";
+  public currentType = "Account";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.model.loginAccountSF('adidaspruebaucm@gmail.com','clave7896');
+    this.model.loginAccountSF('pescanovanova8@gmail.com','dsadsddsads');
     this.lead.loginLeadSF('hola@ucm.es', 'miclave123');
   }
 

@@ -1,14 +1,16 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 import { Opportunity } from "./opportunity.model";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { SafeResourceUrl } from "@angular/platform-browser";
 export class Account {
     public s: string = null;
-    public id: string = null;
     public error: string = null;
     public vOpportunities:Opportunity[] = []; 
     public totalOpportunities: number = null; 
     constructor(
         public http: HttpClient,
+        private sanitizer: DomSanitizer,
         public name: string = null,
         public email: string = null,
         public password: string = null,
@@ -21,7 +23,9 @@ export class Account {
         public accountNumber: string = null,
         public phone: string = null,
         public billingCity: string = null,
-        public logo: string = null
+        public logo: SafeResourceUrl | string = null,
+        public id: string = null,
+        
     ){}
 
     public async insertAccountSF() {
@@ -99,7 +103,9 @@ export class Account {
 
       var parsed = JSON.parse(this.s);
 
-      var src = parsed.records[0].Logo__c.substring(13,141);
+      var src = this.sanitizer.bypassSecurityTrustResourceUrl(parsed.records[0].Logo__c.substring(13,141).replace('&amp;','&').replace('&amp;','&'));
+
+      console.log(parsed.records[0].Logo__c.substring(13,141).replace('&amp;','&').replace('&amp;','&'));
 
       if (parsed.totalSize > 0){
         this.id = parsed.records[0].Id;
@@ -157,7 +163,8 @@ export class Account {
                                                     parsed.records[_i].StartDate__c,
                                                     parsed.records[_i].EndDate__c,
                                                     parsed.records[_i].Area__c,
-                                                    parsed.records[_i].AccountId);
+                                                    parsed.records[_i].AccountId,
+                                                    parsed.records[_i].Id);
         }
       }else{
         this.error = "Error, los credenciales no son correctas o el alumno está verificado";

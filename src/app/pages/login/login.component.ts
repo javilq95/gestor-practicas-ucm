@@ -20,4 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  //sessionStorage.setItem('currentUser', JSON.stringify(user));
+
 }

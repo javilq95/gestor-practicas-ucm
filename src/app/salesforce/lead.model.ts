@@ -3,7 +3,6 @@ import { accessToken } from "./auth";
 import { Opportunity } from "./opportunity.model";
 export class Lead {
     public s: string = null;
-    public id: string = null;
     public error: string = null;
     public vOpportunities:Opportunity[] = []; 
     public totalOpportunities: number = null; 
@@ -20,7 +19,8 @@ export class Lead {
         public area: string = null,
         public titulation: string = null,
         public phone: string = null,
-        public city: string = null
+        public city: string = null,
+        public id: string = null
     ){}
 
     public async insertLeadSF() {
@@ -137,7 +137,7 @@ export class Lead {
         for (var _i = 0; _i < this.totalOpportunities; _i++) {
         
           var endPoint2 = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+Id='"+parsed.records[_i].Opportunity__c+"'";
-
+          
           await this.http.get<any>(
                 endPoint2,
                 {
@@ -151,20 +151,21 @@ export class Lead {
                 var parsed2 = JSON.parse(this.s);
 
                 this.vOpportunities[_i] = new Opportunity(this.http,
-                  parsed2.records[_i].Name,
-                  parsed2.records[_i].StageName,
-                  parsed2.records[_i].CloseDate,
-                  parsed2.records[_i].Type,
-                  parsed2.records[_i].Amount,
-                  parsed2.records[_i].Probability,
-                  parsed2.records[_i].WeekDays__c,
-                  parsed2.records[_i].TotalDays__c,
-                  parsed2.records[_i].StartTime__c,
-                  parsed2.records[_i].EndTime__c,
-                  parsed2.records[_i].StartDate__c,
-                  parsed2.records[_i].EndDate__c,
-                  parsed2.records[_i].Area__c,
-                  parsed2.records[_i].AccountId);
+                  parsed2.records[0].Name,
+                  parsed2.records[0].StageName,
+                  parsed2.records[0].CloseDate,
+                  parsed2.records[0].Type,
+                  parsed2.records[0].Amount,
+                  parsed2.records[0].Probability,
+                  parsed2.records[0].WeekDays__c,
+                  parsed2.records[0].TotalDays__c,
+                  parsed2.records[0].StartTime__c,
+                  parsed2.records[0].EndTime__c,
+                  parsed2.records[0].StartDate__c,
+                  parsed2.records[0].EndDate__c,
+                  parsed2.records[0].Area__c,
+                  parsed2.records[0].AccountId,
+                  parsed2.records[0].Id);
         }
       }
     }
@@ -203,10 +204,30 @@ export class Lead {
                                                     parsed.records[_i].StartDate__c,
                                                     parsed.records[_i].EndDate__c,
                                                     parsed.records[_i].Area__c,
-                                                    parsed.records[_i].AccountId);
+                                                    parsed.records[_i].AccountId,
+                                                    parsed.records[_i].Id);
         }
       }
     }
+
+    public async insertOpportunityLeadSF(opportunityId:string) {
+
+      var body = {
+          'Lead__c':this.id, 
+          'Opportunity__c': opportunityId
+      };
+      return this.http.post<any>(
+          'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/OpportunityLead__c/',
+          body,
+          {
+            headers: {
+              'Authorization': accessToken,
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'POST',
+              'Content-Type': 'application/json'
+            }
+          }).toPromise().then(x => this.s = JSON.stringify(x));
+  }
 
     public resetObject(){
       this.id = null;

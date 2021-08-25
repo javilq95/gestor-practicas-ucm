@@ -2,7 +2,6 @@ import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 export class Contact {
     public s: string = null;
-    public id: string = null;
     public error: string = null;
     constructor(
         public http: HttpClient,
@@ -16,7 +15,8 @@ export class Contact {
         public phone: string = null,
         public mobilePhone: string = null,
         public mark: string = null,
-        public billingCity: string = null
+        public billingCity: string = null,
+        public id: string = null
     ){}
 
     public async insertContactSF() {
@@ -31,7 +31,7 @@ export class Contact {
           'Titulation__c': this.titulation,
           'Phone': this.phone,
           'MobilePhone': this.mobilePhone,
-          'BillingCity': this.billingCity
+          'BillingCity': this.billingCity,
       };
       return this.http.post<any>(
           'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact',

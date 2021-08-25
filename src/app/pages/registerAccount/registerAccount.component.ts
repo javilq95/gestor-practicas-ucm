@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/salesforce/Account.model';
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from 'src/app/salesforce/auth';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registerAccount',
@@ -10,12 +11,19 @@ import { accessToken } from 'src/app/salesforce/auth';
 })
 export class RegisterAccountComponent implements OnInit {
 
-  model = new Account(this.http);
+  model = new Account(this.http, this.sanitizer);
 
   public s;
 
   public vTypes:string[] = []; 
   public vIndustries:string[] = []; 
+
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
+  //
+  ngOnInit() {
+    this.getTypes();
+    this.getIndustries();
+  }
 
   public async getTypes (){
 
@@ -61,13 +69,6 @@ export class RegisterAccountComponent implements OnInit {
       this.vIndustries[_i] = parsed.values[_i].label;
       _i++;
     }
-  }
-
-  constructor(private http: HttpClient) { }
-  //
-  ngOnInit() {
-    this.getTypes();
-    this.getIndustries();
   }
 
 }
