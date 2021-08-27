@@ -9,7 +9,7 @@ import { LoginComponent } from '../../pages/login/login.component';
 import { LoginAccountComponent } from '../../pages/loginAccount/loginAccount.component';
 import { RegisterComponent } from '../../pages/register/register.component';
 import { RegisterAccountComponent } from '../../pages/registerAccount/registerAccount.component';
-import { NewOpportunityComponent } from '../../pages/newOpportunity/newOpportunity.component';
+import { SupportCaseComponent } from 'src/app/pages/supportCase/supportCase';
 
 @NgModule({
   imports: [
@@ -23,7 +23,7 @@ import { NewOpportunityComponent } from '../../pages/newOpportunity/newOpportuni
     LoginAccountComponent,
     RegisterComponent,
     RegisterAccountComponent,
-    //NewOpportunityComponent
+    SupportCaseComponent
   ]
 })
 export class AuthLayoutModule { }
