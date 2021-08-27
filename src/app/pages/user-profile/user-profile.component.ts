@@ -19,10 +19,15 @@ export class UserProfileComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    if(currentType == sessionStorage.getItem('currentType')){
     this.getAreas();
     this.getTitulations();
+    }
+    if(currentType == "Area"){
+    this.getAreas();
     this.getTypes();
     this.getIndustries();
+    }
   }
 
   public async getAreas (){

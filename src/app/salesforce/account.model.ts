@@ -1,8 +1,9 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
-import { Opportunity } from "./opportunity.model";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { DomSanitizer } from "@angular/platform-browser";
 import { SafeResourceUrl } from "@angular/platform-browser";
+import { Opportunity } from "./opportunity.model";
+
 export class Account {
     public s: string = null;
     public error: string = null;

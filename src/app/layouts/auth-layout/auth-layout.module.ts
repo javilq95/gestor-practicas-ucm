@@ -23,7 +23,7 @@ import { NewOpportunityComponent } from '../../pages/newOpportunity/newOpportuni
     LoginAccountComponent,
     RegisterComponent,
     RegisterAccountComponent,
-    NewOpportunityComponent
+    //NewOpportunityComponent
   ]
 })
 export class AuthLayoutModule { }

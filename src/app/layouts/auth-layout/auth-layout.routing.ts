@@ -11,5 +11,5 @@ export const AuthLayoutRoutes: Routes = [
     { path: 'loginAccount',       component: LoginAccountComponent },
     { path: 'register',       component: RegisterComponent },
     { path: 'registerAccount',       component: RegisterAccountComponent },
-    { path: 'newOpportunity',       component: NewOpportunityComponent }
+    //{ path: 'newOpportunity',       component: NewOpportunityComponent }
 ];

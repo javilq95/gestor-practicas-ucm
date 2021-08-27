@@ -1,6 +1,7 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 import { Opportunity } from "./opportunity.model";
+
 export class Lead {
     public s: string = null;
     public error: string = null;
@@ -113,6 +114,8 @@ export class Lead {
       }
       this.getOpportunities();
       this.getOpportunitiesArea();
+      sessionStorage.setItem('currentUser', JSON.stringify(this));
+      sessionStorage.setItem('currentType', 'Lead');
     }
 
     public async getOpportunities (){

@@ -1,6 +1,7 @@
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from "./auth";
 import { Lead } from "./Lead.model";
+
 export class Opportunity {
     public s;
     public vLeads:Lead[] = []; 
