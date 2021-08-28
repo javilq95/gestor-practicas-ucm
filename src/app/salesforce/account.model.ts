@@ -1,178 +1,160 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { accessToken } from "./auth";
-import { DomSanitizer } from "@angular/platform-browser";
 import { SafeResourceUrl } from "@angular/platform-browser";
-import { Opportunity } from "./opportunity.model";
 
+export class AccountModel {
+  public name: string = null;
+  public email: string = null;
+  public password: string = null;
+  public description: string = null;
+  public type: string = null;
+  public industry: string = null;
+  public annualRevenue: number = null;
+  public website: string = null;
+  public numberOfEmployees: number = null;
+  public accountNumber: string = null;
+  public phone: string = null;
+  public billingCity: string = null;
+  public logo: SafeResourceUrl | string = null;
+  public id: string = null;
+  public vOpportunities: string[] = [];
+  public totalOpportunities: number = null;
+
+}
 export class Account {
-    public s: string = null;
-    public error: string = null;
-    public vOpportunities:Opportunity[] = []; 
-    public totalOpportunities: number = null; 
-    constructor(
-        public http: HttpClient,
-        private sanitizer: DomSanitizer,
-        public name: string = null,
-        public email: string = null,
-        public password: string = null,
-        public description: string = null,
-        public type: string= null,
-        public industry: string = null,
-        public annualRevenue: number = null,
-        public website: string = null,
-        public numberOfEmployees: number = null,
-        public accountNumber: string = null,
-        public phone: string = null,
-        public billingCity: string = null,
-        public logo: SafeResourceUrl | string = null,
-        public id: string = null,
-        
-    ){}
+  public s: string = null;
+  public error: string = null;
+  public accountModel: AccountModel = new AccountModel();
+  constructor(
+    public http: HttpClient
+  ) {
+  }
 
-    public async insertAccountSF() {
+  public async insertAccountSF() {
 
-      var body = {
-          'Name':this.name,
-          'Email__c': this.email,
-          'Password__c': this.password,
-          'Description': this.description,
-          'Type': this.type,
-          'Industry': this.industry,
-          'AnnualRevenue': this.annualRevenue,
-          'Website': this.website,
-          'AccountNumber': this.accountNumber,
-          'NumberOfEmployees': this.numberOfEmployees,
-          'Phone': this.phone,
-          'BillingCity': this.billingCity,
-          'Logo__c': this.logo
-      };
-      return this.http.post<any>(
-          'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/account',
-          body,
-          {
-            headers: {
-              'Authorization': accessToken,
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'POST',
-              'Content-Type': 'application/json'
-            }
-          }).toPromise().then(x => this.s = JSON.stringify(x));
-    }
-
-    public async updateAccountSF(newName:string, newDescription:string, newType:string, newIndustry:string, newRevenue:number, newWebsite:string, newAccountNumber:string, newEmployees:number, newPhone:string, newCity:string) {
-
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v52.0/sobjects/Account/"+this.id;
-
-      var body = {
-          'Name':newName,
-          'Description': newDescription,
-          'Type': newType,
-          'Industry': newIndustry,
-          'AnnualRevenue': newRevenue,
-          'Website': newWebsite,
-          'AccountNumber': newAccountNumber,
-          'NumberOfEmployees': newEmployees,
-          'Phone': newPhone,
-          'BillingCity': newCity
-      };
-      return this.http.post<any>(
-          endPoint,
-          body,
-          {
-            headers: {
-              'Authorization': accessToken,
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'POST',
-              'Content-Type': 'application/json'
-            }
-          }).toPromise().then(x => this.s = JSON.stringify(x));
-    }
-
-    public async loginAccountSF (loginEmail:string, loginPassword:string){
-
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Email__c='"+loginEmail+"'+AND+Password__c='"+loginPassword+"'+AND+Verification__c=true";
-
-      await this.http.get<any>(
-            endPoint,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-
-      var parsed = JSON.parse(this.s);
-
-      var src = this.sanitizer.bypassSecurityTrustResourceUrl(parsed.records[0].Logo__c.substring(13,141).replace('&amp;','&').replace('&amp;','&'));
-
-      console.log(parsed.records[0].Logo__c.substring(13,141).replace('&amp;','&').replace('&amp;','&'));
-
-      if (parsed.totalSize > 0){
-        this.id = parsed.records[0].Id;
-        this.name = parsed.records[0].Name;
-        this.email = parsed.records[0].Email__c;
-        this.password = parsed.records[0].Password__c;
-        this.phone = parsed.records[0].Phone;
-        this.description = parsed.records[0].Description;
-        this.type = parsed.records[0].Type;
-        this.industry = parsed.records[0].Industry;
-        this.annualRevenue = parsed.records[0].AnnualRevenue;
-        this.website = parsed.records[0].Website;
-        this.accountNumber = parsed.records[0].AccountNumber;
-        this.numberOfEmployees = parsed.records[0].NumberOfEmployees;
-        this.billingCity = parsed.records[0].BillingCity;
-        this.logo = src;
-      }else{
-        this.error = "Error, los credenciales no son correctas o el alumno está verificado";
-      }
-
-      this.getOpportunities();
-    }
-
-    public async getOpportunities (){
-
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+AccountId='"+this.id+"'";
-
-      await this.http.get<any>(
-            endPoint,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-
-      var parsed = JSON.parse(this.s);
-
-      this.totalOpportunities = parsed.totalSize;
-
-      if (this.totalOpportunities > 0){
-        for (var _i = 0; _i < this.totalOpportunities; _i++) {
-          this.vOpportunities[_i] = new Opportunity(this.http,
-                                                    parsed.records[_i].Name,
-                                                    parsed.records[_i].StageName,
-                                                    parsed.records[_i].CloseDate,
-                                                    parsed.records[_i].Type,
-                                                    parsed.records[_i].Amount,
-                                                    parsed.records[_i].Probability,
-                                                    parsed.records[_i].WeekDays__c,
-                                                    parsed.records[_i].TotalDays__c,
-                                                    parsed.records[_i].StartTime__c,
-                                                    parsed.records[_i].EndTime__c,
-                                                    parsed.records[_i].StartDate__c,
-                                                    parsed.records[_i].EndDate__c,
-                                                    parsed.records[_i].Area__c,
-                                                    parsed.records[_i].AccountId,
-                                                    parsed.records[_i].Id);
+    var body = {
+      'Name': this.accountModel.name,
+      'Email__c': this.accountModel.email,
+      'Password__c': this.accountModel.password,
+      'Description': this.accountModel.description,
+      'Type': this.accountModel.type,
+      'Industry': this.accountModel.industry,
+      'AnnualRevenue': this.accountModel.annualRevenue,
+      'Website': this.accountModel.website,
+      'AccountNumber': this.accountModel.accountNumber,
+      'NumberOfEmployees': this.accountModel.numberOfEmployees,
+      'Phone': this.accountModel.phone,
+      'BillingCity': this.accountModel.billingCity,
+      'Logo__c': this.accountModel.logo
+    };
+    return this.http.post<any>(
+      'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/account',
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST',
+          'Content-Type': 'application/json'
         }
-      }else{
-        this.error = "Error, los credenciales no son correctas o el alumno está verificado";
-      }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+  }
+
+  public async updateAccountSF() {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v52.0/sobjects/Account/" + this.accountModel.id;
+
+    var body = {
+      'Name': this.accountModel.name,
+      'Description': this.accountModel.description,
+      'Type': this.accountModel.type,
+      'Industry': this.accountModel.industry,
+      'AnnualRevenue': this.accountModel.annualRevenue,
+      'Website': this.accountModel.website,
+      'AccountNumber': this.accountModel.accountNumber,
+      'NumberOfEmployees': this.accountModel.numberOfEmployees,
+      'Phone': this.accountModel.phone,
+      'BillingCity': this.accountModel.billingCity
+    };
+    return this.http.patch<any>(
+      endPoint,
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'PATCH',
+          'Content-Type': 'application/json'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+  }
+
+  public async loginAccountSF(loginEmail: string, loginPassword: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Email__c='" + loginEmail + "'+AND+Password__c='" + loginPassword + "'+AND+Verification__c=true";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if (parsed.totalSize > 0) {
+      this.accountModel.id = parsed.records[0].Id;
+      this.accountModel.name = parsed.records[0].Name;
+      this.accountModel.email = parsed.records[0].Email__c;
+      this.accountModel.password = parsed.records[0].Password__c;
+      this.accountModel.phone = parsed.records[0].Phone;
+      this.accountModel.description = parsed.records[0].Description;
+      this.accountModel.type = parsed.records[0].Type;
+      this.accountModel.industry = parsed.records[0].Industry;
+      this.accountModel.annualRevenue = parsed.records[0].AnnualRevenue;
+      this.accountModel.website = parsed.records[0].Website;
+      this.accountModel.accountNumber = parsed.records[0].AccountNumber;
+      this.accountModel.numberOfEmployees = parsed.records[0].NumberOfEmployees;
+      this.accountModel.billingCity = parsed.records[0].BillingCity;
+      this.accountModel.logo = parsed.records[0].Logo__c;
+    } else {
+      this.error = "Error, los credenciales no son correctas o el alumno está verificado";
     }
 
-    get currentAccount() {
-        return JSON.stringify(this);
+    await this.getOpportunities();
+    sessionStorage.setItem('currentUser', JSON.stringify(this.accountModel));
+    sessionStorage.setItem('currentType', 'Account');
+  }
+
+  public async getOpportunities() {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+AccountId='" + this.accountModel.id + "'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    this.accountModel.totalOpportunities = parsed.totalSize;
+
+    if (this.accountModel.totalOpportunities > 0) {
+      for (var _i = 0; _i < this.accountModel.totalOpportunities; _i++) {
+        this.accountModel.vOpportunities[_i] = parsed.records[_i].Id;
+      }
     }
+  }
+
+  get currentAccount() {
+    return JSON.stringify(this);
+  }
 }

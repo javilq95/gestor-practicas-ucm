@@ -22,7 +22,6 @@ export class NewOpportunityComponent implements OnInit {
     this.getAreas();
     this.getTypes();
     this.getStages();
-    this.model.accountId = "0010900000d1biYAAQ";
   }
 
   public async getAreas (){

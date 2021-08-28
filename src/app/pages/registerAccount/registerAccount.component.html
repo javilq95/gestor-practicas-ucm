@@ -45,7 +45,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nombre" type="text" name="name" id="name" [(ngModel)]=model.name required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Nombre" type="text" name="name" id="name" [(ngModel)]=model.accountModel.name required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" name="emailA" id="emailA" [(ngModel)]=model.email required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Email" type="email" name="emailA" id="emailA" [(ngModel)]=model.accountModel.email required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Clave" type="password" name="passwordA" id="passwordA" [(ngModel)]=model.password required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Clave" type="password" name="passwordA" id="passwordA" [(ngModel)]=model.accountModel.password required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-badge"></i></span>
                 </div>
-                <input class="form-control" placeholder="Número de Identificación" type="text" name="accountNumber" id="accountNumber" [(ngModel)]=model.accountNumber required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Número de Identificación" type="text" name="accountNumber" id="accountNumber" [(ngModel)]=model.accountModel.accountNumber required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                 </div>
-                <input class="form-control" placeholder="Teléfono" type="text" name="phoneA" id="phoneA" [(ngModel)]=model.phone required>
+                <input class="form-control" placeholder="Teléfono" type="text" name="phoneA" id="phoneA" [(ngModel)]=model.accountModel.phone required>
               </div>
             </div>
 
@@ -90,7 +90,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-book-bookmark"></i></span>
                 </div>
-                <input class="form-control" placeholder="Descripción" type="text" name="description" id="description" [(ngModel)]=model.description required>
+                <input class="form-control" placeholder="Descripción" type="text" name="description" id="description" [(ngModel)]=model.accountModel.description required>
               </div>
             </div>
 
@@ -99,7 +99,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
                 </div>
-                <input class="form-control" placeholder="Ciudad" type="text" name="billingcity" id="billingcity" [(ngModel)]=model.billingCity required>
+                <input class="form-control" placeholder="Ciudad" type="text" name="billingcity" id="billingcity" [(ngModel)]=model.accountModel.billingCity required>
               </div>
             </div>
 
@@ -108,7 +108,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-world-2"></i></span>
                 </div>
-                <input class="form-control" placeholder="Sitio Web" type="text" name="website" id="website" [(ngModel)]=model.website required>
+                <input class="form-control" placeholder="Sitio Web" type="text" name="website" id="website" [(ngModel)]=model.accountModel.website required>
               </div>
             </div>
 
@@ -117,7 +117,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-money-coins"></i></span>
                 </div>
-                <input class="form-control" placeholder="Ingresos anuales" type="text" name="annualRevenue" id="annualRevenue" [(ngModel)]=model.annualRevenue required>
+                <input class="form-control" placeholder="Ingresos anuales" type="text" name="annualRevenue" id="annualRevenue" [(ngModel)]=model.accountModel.annualRevenue required>
               </div>
             </div>
 
@@ -126,7 +126,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-single-02"></i></span>
                 </div>
-                <input class="form-control" placeholder="Número de empleados" type="number" name="numberOfEmployees" id="numberOfEmployees" [(ngModel)]=model.numberOfEmployees required>
+                <input class="form-control" placeholder="Número de empleados" type="number" name="numberOfEmployees" id="numberOfEmployees" [(ngModel)]=model.accountModel.numberOfEmployees required>
               </div>
             </div>
 
@@ -134,7 +134,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01"><i class="ni ni-hat-3"></i>&nbsp;&nbsp;&nbsp;Tipo</label>
               </div>
-              <select class="custom-select" id="inputGroupSelect01" name="type" [(ngModel)]=model.type required>
+              <select class="custom-select" id="inputGroupSelect01" name="type" [(ngModel)]=model.accountModel.type required>
                 <ng-container *ngFor="let item of vTypes;let i=index">
                   <option value="{{vTypes[i]}}">{{vTypes[i]}}</option>
                 </ng-container>
@@ -145,7 +145,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect02"><i class="ni ni-chart-pie-35"></i>&nbsp;&nbsp;&nbsp;Sector</label>
               </div>
-              <select class="custom-select" id="inputGroupSelect02"  name="industry" [(ngModel)]=model.industry required>
+              <select class="custom-select" id="inputGroupSelect02"  name="industry" [(ngModel)]=model.accountModel.industry required>
                 <ng-container *ngFor="let item of vIndustries;let i=index">
                   <option value="{{vIndustries[i]}}">{{vIndustries[i]}}</option>
                 </ng-container>

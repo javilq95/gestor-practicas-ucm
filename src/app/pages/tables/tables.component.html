@@ -11,7 +11,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Empresa</h5>
-                    <span class="h2 font-weight-bold mb-0">{{model.name}}</span>
+                    <span class="h2 font-weight-bold mb-0">{{currentUser.name}}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-blue text-white rounded-circle shadow">
@@ -28,7 +28,7 @@
                 <div class="row">
                   <div class="col">
                     <h5 class="card-title text-uppercase text-muted mb-0">Nº Ofertas</h5>
-                    <span class="h2 font-weight-bold mb-0">{{model.totalOpportunities}}</span>
+                    <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunities}}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -68,27 +68,27 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let item of model.vOpportunities;let i=index">              
+                <ng-container *ngFor="let item of vOpportunitiesAccount;let i=index">              
                 <tr>
                   <th scope="row">
                     <div class="media align-items-center">
                       <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                        <img alt="Image placeholder" [src]="model.logo">
+                        <img alt="Image placeholder" [src]="secureLogo">
                       </a>
-                      <div *ngIf="model.totalOpportunities>0">
+                      <div *ngIf="currentUser.totalOpportunities>0">
                         <div class="media-body">
-                          <span class="mb-0 text-sm">{{model.vOpportunities[i].name}}</span>
+                          <span class="mb-0 text-sm">{{vOpportunitiesAccount[i].name}}</span>
                         </div>
                       </div>
                     </div>
                   </th>
-                    <td><div *ngIf="model.totalOpportunities>0">
-                      {{model.vOpportunities[i].amount}} €
+                    <td><div *ngIf="currentUser.totalOpportunities>0">
+                      {{vOpportunitiesAccount[i].amount}} €
                     </div></td>
                   <td>
-                    <div *ngIf="model.totalOpportunities>0">
+                    <div *ngIf="currentUser.totalOpportunities>0">
                     <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> {{model.vOpportunities[i].stageName}}
+                      <i class="bg-warning"></i> {{vOpportunitiesAccount[i].stageName}}
                     </span>
                     </div>
                   </td>
@@ -110,13 +110,13 @@
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div *ngIf="model.totalOpportunities>0">
-                      <span class="mr-2">{{model.vOpportunities[i].probability}}%</span>
+                      <div *ngIf="currentUser.totalOpportunities>0">
+                      <span class="mr-2">{{vOpportunitiesAccount[i].probability}}%</span>
                       </div>
-                      <div *ngIf="model.totalOpportunities>0">
+                      <div *ngIf="currentUser.totalOpportunities>0">
                       <div>
                         <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + model.vOpportunities[i].probability + '%;'"></div>
+                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesAccount[i].probability + '%;'"></div>
                         </div>
                         </div>
                       </div>
@@ -144,6 +144,7 @@
     </div>
   </div>
   </div>
+  <!-- LEAD -->
   <div *ngIf="currentType==='Lead'">
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
@@ -156,7 +157,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Candidato</h5>
-                  <span class="h2 font-weight-bold mb-0">{{lead.firstName}} {{lead.lastName}}</span>
+                  <span class="h2 font-weight-bold mb-0">{{currentUser.firstName}} {{currentUser.lastName}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-red text-white rounded-circle shadow">
@@ -173,7 +174,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Ofertas inscritas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{lead.totalOpportunities}}</span>
+                  <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunities}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
@@ -190,7 +191,7 @@
               <div class="row">
                 <div class="col">
                   <h5 class="card-title text-uppercase text-muted mb-0">Ofertas abiertas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{lead.totalOpportunitiesArea}}</span>
+                  <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunitiesArea}}</span>
                 </div>
                 <div class="col-auto">
                   <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -227,46 +228,46 @@
               </tr>
             </thead>
             <tbody>
-              <ng-container *ngFor="let item of lead.vOpportunities;let i=index">              
+              <ng-container *ngFor="let item of vOpportunitiesLead;let i=index">              
               <tr>
                 <th scope="row">
                   <div class="media align-items-center">
                     <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
                       <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
                     </a>
-                    <div *ngIf="lead.totalOpportunities>0">
+                    <div *ngIf="currentUser.totalOpportunities>0">
                       <div class="media-body">
-                        <span class="mb-0 text-sm">{{lead.vOpportunities[i].name}}</span>
+                        <span class="mb-0 text-sm">{{vOpportunitiesLead[i].name}}</span>
                       </div>
                     </div>
                   </div>
                 </th>
-                  <td><div *ngIf="lead.totalOpportunities>0">
-                    {{lead.vOpportunities[i].amount}} €
+                  <td><div *ngIf="currentUser.totalOpportunities>0">
+                    {{vOpportunitiesLead[i].amount}} €
                   </div></td>
                 <td>
-                  <div *ngIf="lead.totalOpportunities>0">
+                  <div *ngIf="currentUser.totalOpportunities>0">
                   <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> {{lead.vOpportunities[i].stageName}}
+                    <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
                   </span>
                   </div>
                 </td>
                 <td>
-                  <div *ngIf="lead.totalOpportunities>0">
+                  <div *ngIf="currentUser.totalOpportunities>0">
                   <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> {{lead.vOpportunities[i].stageName}}
+                    <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
                   </span>
                   </div>
                 </td>
                 <td>
                   <div class="d-flex align-items-center">
-                    <div *ngIf="lead.totalOpportunities>0">
-                    <span class="mr-2">{{lead.vOpportunities[i].probability}}%</span>
+                    <div *ngIf="currentUser.totalOpportunities>0">
+                    <span class="mr-2">{{vOpportunitiesLead[i].probability}}%</span>
                     </div>
-                    <div *ngIf="lead.totalOpportunities>0">
+                    <div *ngIf="currentUser.totalOpportunities>0">
                     <div>
                       <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + lead.vOpportunities[i].probability + '%;'"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesLead[i].probability + '%;'"></div>
                       </div>
                       </div>
                     </div>
@@ -304,27 +305,27 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let item of lead.vOpportunitiesArea;let i=index">              
+                <ng-container *ngFor="let item of vOpportunitiesAreaLead;let i=index">              
                 <tr>
                   <th scope="row">
                     <div class="media align-items-center">
                       <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
                         <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
                       </a>
-                      <div *ngIf="lead.totalOpportunitiesArea>0">
+                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
                         <div class="media-body">
-                          <span class="mb-0 text-sm">{{lead.vOpportunitiesArea[i].name}}</span>
+                          <span class="mb-0 text-sm">{{vOpportunitiesAreaLead[i].name}}</span>
                         </div>
                       </div>
                     </div>
                   </th>
-                    <td><div *ngIf="lead.totalOpportunitiesArea>0">
-                      {{lead.vOpportunitiesArea[i].amount}} €
+                    <td><div *ngIf="currentUser.totalOpportunitiesArea>0">
+                      {{vOpportunitiesAreaLead[i].amount}} €
                     </div></td>
                   <td>
-                    <div *ngIf="lead.totalOpportunitiesArea>0">
+                    <div *ngIf="currentUser.totalOpportunitiesArea>0">
                     <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> {{lead.vOpportunitiesArea[i].stageName}}
+                      <i class="bg-warning"></i> {{vOpportunitiesAreaLead[i].stageName}}
                     </span>
                     </div>
                   </td>
@@ -346,13 +347,13 @@
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
-                      <div *ngIf="lead.totalOpportunitiesArea>0">
-                      <span class="mr-2">{{lead.vOpportunitiesArea[i].probability}}%</span>
+                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                      <span class="mr-2">{{vOpportunitiesAreaLead[i].probability}}%</span>
                       </div>
-                      <div *ngIf="lead.totalOpportunitiesArea>0">
+                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
                       <div>
                         <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + lead.vOpportunitiesArea[i].probability + '%;'"></div>
+                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesAreaLead[i].probability + '%;'"></div>
                         </div>
                         </div>
                       </div>
@@ -365,7 +366,7 @@
                       </a>
                       <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
                         <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
-                        <a class="dropdown-item" (click)=lead.insertOpportunityLeadSF(lead.vOpportunitiesArea[i].id) href="javascript:void(0)">Inscribirse</a>
+                        <a class="dropdown-item" (click)=leadUser.insertOpportunityLeadSF(vOpportunitiesAreaLead[i].id) href="javascript:void(0)">Inscribirse</a>
                       </div>
                     </div>
                   </td>
@@ -376,7 +377,6 @@
         </div>
       </div>
     </div>
-    {{lead.error}}
   </div>
 </div>
 </div>

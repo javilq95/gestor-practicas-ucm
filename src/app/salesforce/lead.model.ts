@@ -1,247 +1,205 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { accessToken } from "./auth";
-import { Opportunity } from "./opportunity.model";
+
+export class LeadModel {
+  public firstName: string = null;
+  public lastName: string = null;
+  public email: string = null;
+  public password: string = null;
+  public nif: string = null;
+  public area: string = null;
+  public titulation: string = null;
+  public phone: string = null;
+  public city: string = null;
+  public id: string = null;
+  public vOpportunities: string[] = [];
+  public totalOpportunities: number = null;
+  public vOpportunitiesArea: string[] = [];
+  public totalOpportunitiesArea: number = null;
+}
 
 export class Lead {
-    public s: string = null;
-    public error: string = null;
-    public vOpportunities:Opportunity[] = []; 
-    public totalOpportunities: number = null; 
-    public vOpportunitiesArea:Opportunity[] = []; 
-    public totalOpportunitiesArea: number = null; 
 
-    constructor(
-        public http: HttpClient,
-        public firstName: string = null,
-        public lastName: string = null,
-        public email: string = null,
-        public password: string = null,
-        public nif: string = null,
-        public area: string = null,
-        public titulation: string = null,
-        public phone: string = null,
-        public city: string = null,
-        public id: string = null
-    ){}
+  public s: string = null;
+  public error: string = null;
+  public leadModel: LeadModel = new LeadModel();
 
-    public async insertLeadSF() {
+  constructor(
+    public http: HttpClient
+  ) { }
 
-        var body = {
-            'FirstName':this.firstName, 
-            'LastName': this.lastName, 
-            'Email': this.email,
-            'Password__c': this.password,
-            'NIF__c': this.nif,
-            'Area__c': this.area,
-            'Titulation__c': this.titulation,
-            'Phone': this.phone,
-            'City': this.city,
-            'Company': 'Universidad Complutense de Madrid',
-        };
-        return this.http.post<any>(
-            'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
-            body,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'POST',
-                'Content-Type': 'application/json'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-    }
+  public async insertLeadSF() {
 
-    public async updateLeadSF() {
-
-      var body = {
-          'FirstName':this.firstName, 
-          'LastName': this.lastName, 
-          'Email': this.email,
-          'Password__c': this.password,
-          'NIF__c': this.nif,
-          'Area__c': this.area,
-          'Titulation__c': this.titulation,
-          'Phone': this.phone,
-          'City': this.city,
-          'Company': 'Universidad Complutense de Madrid',
-      };
-      return this.http.post<any>(
-          'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
-          body,
-          {
-            headers: {
-              'Authorization': accessToken,
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'POST',
-              'Content-Type': 'application/json'
-            }
-          }).toPromise().then(x => this.s = JSON.stringify(x));
+    var body = {
+      'FirstName': this.leadModel.firstName,
+      'LastName': this.leadModel.lastName,
+      'Email': this.leadModel.email,
+      'Password__c': this.leadModel.password,
+      'NIF__c': this.leadModel.nif,
+      'Area__c': this.leadModel.area,
+      'Titulation__c': this.leadModel.titulation,
+      'Phone': this.leadModel.phone,
+      'City': this.leadModel.city,
+      'Company': 'Universidad Complutense de Madrid',
+    };
+    return this.http.post<any>(
+      'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST',
+          'Content-Type': 'application/json'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
   }
 
-    get currentLead() {
-        return JSON.stringify(this);
-    }
+  public async updateLeadSF() {
 
-    public async loginLeadSF (loginEmail:string, loginPassword:string){
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v52.0/sobjects/Lead/" + this.leadModel.id;
 
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+FirstName+,+LastName+,+Email+,+Password__c+,+NIF__c+,+Area__c+,+Titulation__c+,+Phone+,+City+,+Company+FROM+Lead+WHERE+Email='"+loginEmail+"'+AND+Password__c='"+loginPassword+"'+AND+Verification__c=true+AND+isConverted=false";
-
-      await this.http.get<any>(
-            endPoint,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-
-      var parsed = JSON.parse(this.s);
-
-      if (parsed.totalSize == 1){
-        this.id = parsed.records[0].Id;
-        this.firstName = parsed.records[0].FirstName;
-        this.lastName = parsed.records[0].LastName;
-        this.email = parsed.records[0].Email;
-        this.password = parsed.records[0].Password__c;
-        this.nif = parsed.records[0].NIF__c;
-        this.area = parsed.records[0].Area__c;
-        this.titulation = parsed.records[0].Titulation__c;
-        this.phone = parsed.records[0].Phone;
-        this.city = parsed.records[0].City;
-      }else{
-        this.error = "Error, los credenciales no son correctas o el alumno está verificado";
-      }
-      this.getOpportunities();
-      this.getOpportunitiesArea();
-      sessionStorage.setItem('currentUser', JSON.stringify(this));
-      sessionStorage.setItem('currentType', 'Lead');
-    }
-
-    public async getOpportunities (){
-      
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Lead__c='"+this.id+"'";
-
-      await this.http.get<any>(
-            endPoint,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-
-      var parsed = JSON.parse(this.s);
-
-      this.totalOpportunities = parsed.totalSize;
-      
-      if (this.totalOpportunities > 0){
-        for (var _i = 0; _i < this.totalOpportunities; _i++) {
-        
-          var endPoint2 = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+Id='"+parsed.records[_i].Opportunity__c+"'";
-          
-          await this.http.get<any>(
-                endPoint2,
-                {
-                  headers: {
-                    'Authorization': accessToken,
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'GET'
-                  }
-                }).toPromise().then(x => this.s = JSON.stringify(x));
-
-                var parsed2 = JSON.parse(this.s);
-
-                this.vOpportunities[_i] = new Opportunity(this.http,
-                  parsed2.records[0].Name,
-                  parsed2.records[0].StageName,
-                  parsed2.records[0].CloseDate,
-                  parsed2.records[0].Type,
-                  parsed2.records[0].Amount,
-                  parsed2.records[0].Probability,
-                  parsed2.records[0].WeekDays__c,
-                  parsed2.records[0].TotalDays__c,
-                  parsed2.records[0].StartTime__c,
-                  parsed2.records[0].EndTime__c,
-                  parsed2.records[0].StartDate__c,
-                  parsed2.records[0].EndDate__c,
-                  parsed2.records[0].Area__c,
-                  parsed2.records[0].AccountId,
-                  parsed2.records[0].Id);
+    var body = {
+      'FirstName': this.leadModel.firstName,
+      'LastName': this.leadModel.lastName,
+      'NIF__c': this.leadModel.nif,
+      'Area__c': this.leadModel.area,
+      'Titulation__c': this.leadModel.titulation,
+      'Phone': this.leadModel.phone,
+      'City': this.leadModel.city
+    };
+    return this.http.patch<any>(
+      endPoint,
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'PATCH',
+          'Content-Type': 'application/json'
         }
-      }
-    }
-
-    public async getOpportunitiesArea (){
-
-      var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+Area__c='"+this.area+"'+AND+StageName='Sin Asignar'";
-
-      await this.http.get<any>(
-            endPoint,
-            {
-              headers: {
-                'Authorization': accessToken,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET'
-              }
-            }).toPromise().then(x => this.s = JSON.stringify(x));
-
-      var parsed = JSON.parse(this.s);
-
-      this.totalOpportunitiesArea = parsed.totalSize;
-
-      if (this.totalOpportunitiesArea > 0){
-        for (var _i = 0; _i < this.totalOpportunitiesArea; _i++) {
-          this.vOpportunitiesArea[_i] = new Opportunity(this.http,
-                                                    parsed.records[_i].Name,
-                                                    parsed.records[_i].StageName,
-                                                    parsed.records[_i].CloseDate,
-                                                    parsed.records[_i].Type,
-                                                    parsed.records[_i].Amount,
-                                                    parsed.records[_i].Probability,
-                                                    parsed.records[_i].WeekDays__c,
-                                                    parsed.records[_i].TotalDays__c,
-                                                    parsed.records[_i].StartTime__c,
-                                                    parsed.records[_i].EndTime__c,
-                                                    parsed.records[_i].StartDate__c,
-                                                    parsed.records[_i].EndDate__c,
-                                                    parsed.records[_i].Area__c,
-                                                    parsed.records[_i].AccountId,
-                                                    parsed.records[_i].Id);
-        }
-      }
-    }
-
-    public async insertOpportunityLeadSF(opportunityId:string) {
-
-      var body = {
-          'Lead__c':this.id, 
-          'Opportunity__c': opportunityId
-      };
-      return this.http.post<any>(
-          'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/OpportunityLead__c/',
-          body,
-          {
-            headers: {
-              'Authorization': accessToken,
-              'Access-Control-Allow-Origin': '*',
-              'Access-Control-Allow-Methods': 'POST',
-              'Content-Type': 'application/json'
-            }
-          }).toPromise().then(x => this.s = JSON.stringify(x));
+      }).toPromise().then(x => this.s = JSON.stringify(x));
   }
 
-    public resetObject(){
-      this.id = null;
-      this.firstName = null;
-      this.lastName = null;
-      this.email = null;
-      this.password = null;
-      this.nif = null;
-      this.area = null;
-      this.titulation = null;
-      this.phone = null;
-      this.city = null;
+  get currentLead() {
+    return JSON.stringify(this);
+  }
+
+  public async loginLeadSF(loginEmail: string, loginPassword: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+FirstName+,+LastName+,+Email+,+Password__c+,+NIF__c+,+Area__c+,+Titulation__c+,+Phone+,+City+,+Company+FROM+Lead+WHERE+Email='" + loginEmail + "'+AND+Password__c='" + loginPassword + "'+AND+Verification__c=true+AND+isConverted=false";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if (parsed.totalSize == 1) {
+      this.leadModel.id = parsed.records[0].Id;
+      this.leadModel.firstName = parsed.records[0].FirstName;
+      this.leadModel.lastName = parsed.records[0].LastName;
+      this.leadModel.email = parsed.records[0].Email;
+      this.leadModel.password = parsed.records[0].Password__c;
+      this.leadModel.nif = parsed.records[0].NIF__c;
+      this.leadModel.area = parsed.records[0].Area__c;
+      this.leadModel.titulation = parsed.records[0].Titulation__c;
+      this.leadModel.phone = parsed.records[0].Phone;
+      this.leadModel.city = parsed.records[0].City;
+    } else {
+      this.error = "Error, los credenciales no son correctas o el alumno está verificado";
     }
+    await this.getOpportunities();
+    await this.getOpportunitiesArea();
+    sessionStorage.setItem('currentUser', JSON.stringify(this.leadModel));
+    sessionStorage.setItem('currentType', 'Lead');
+  }
+
+  public async getOpportunities() {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Lead__c='" + this.leadModel.id + "'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    this.leadModel.totalOpportunities = parsed.totalSize;
+
+    if (this.leadModel.totalOpportunities > 0) {
+      for (var _i = 0; _i < this.leadModel.totalOpportunities; _i++) {
+        this.leadModel.vOpportunities[_i] = parsed.records[_i].Opportunity__c;
+      }
+    }
+  }
+
+  public async getOpportunitiesArea() {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FROM+Opportunity+WHERE+Area__c='" + this.leadModel.area + "'+AND+StageName='Sin Asignar'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    this.leadModel.totalOpportunitiesArea = parsed.totalSize;
+
+    if (this.leadModel.totalOpportunitiesArea > 0) {
+      for (var _i = 0; _i < this.leadModel.totalOpportunitiesArea; _i++) {
+        this.leadModel.vOpportunitiesArea[_i] = parsed.records[_i].Id;
+      }
+    }
+  }
+
+  public async insertOpportunityLeadSF(opportunityId: string) {
+
+    var body = {
+      'Lead__c': this.leadModel.id,
+      'Opportunity__c': opportunityId
+    };
+    return this.http.post<any>(
+      'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/OpportunityLead__c/',
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST',
+          'Content-Type': 'application/json'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+  }
+
+  public resetObject() {
+    this.leadModel.id = null;
+    this.leadModel.firstName = null;
+    this.leadModel.lastName = null;
+    this.leadModel.email = null;
+    this.leadModel.password = null;
+    this.leadModel.nif = null;
+    this.leadModel.area = null;
+    this.leadModel.titulation = null;
+    this.leadModel.phone = null;
+    this.leadModel.city = null;
+  }
 }

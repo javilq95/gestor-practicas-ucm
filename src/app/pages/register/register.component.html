@@ -45,7 +45,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                 </div>
-                <input class="form-control" placeholder="Nombre" type="text" name="firstName" id="name" [(ngModel)]=model.firstName required>
+                <input class="form-control" placeholder="Nombre" type="text" name="firstName" id="name" [(ngModel)]=model.leadModel.firstName required>
               </div>
             </div>
 
@@ -54,7 +54,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-bold-right"></i></span>
                 </div>
-                <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.lastName required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Apellidos" type="text" name="name" id="lastName" [(ngModel)]=model.leadModel.lastName required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -63,7 +63,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                 </div>
-                <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=model.email required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Email" type="email" name="email" id="email" [(ngModel)]=model.leadModel.email required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
-                <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.password required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.leadModel.password required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -81,7 +81,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-badge"></i></span>
                 </div>
-                <input class="form-control" placeholder="NIF" type="text" name="nif" id="nif" [(ngModel)]=model.nif required><p style="color:red;">*</p>
+                <input class="form-control" placeholder="NIF" type="text" name="nif" id="nif" [(ngModel)]=model.leadModel.nif required><p style="color:red;">*</p>
               </div>
             </div>
 
@@ -90,7 +90,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-mobile-button"></i></span>
                 </div>
-                <input class="form-control" placeholder="Teléfono" type="text" name="phone" id="phone" [(ngModel)]=model.phone required>
+                <input class="form-control" placeholder="Teléfono" type="text" name="phone" id="phone" [(ngModel)]=model.leadModel.phone required>
               </div>
             </div>
 
@@ -99,7 +99,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="ni ni-square-pin"></i></span>
                 </div>
-                <input class="form-control" placeholder="Ciudad" type="text" name="city" id="city" [(ngModel)]=model.city required>
+                <input class="form-control" placeholder="Ciudad" type="text" name="city" id="city" [(ngModel)]=model.leadModel.city required>
               </div>
             </div>
 
@@ -107,7 +107,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01"><i class="ni ni-spaceship"></i>&nbsp;&nbsp;&nbsp;Área</label>
               </div>
-              <select class="custom-select" id="inputGroupSelect01" name="area" [(ngModel)]=model.area required>
+              <select class="custom-select" id="inputGroupSelect01" name="area" [(ngModel)]=model.leadModel.area required>
                 <ng-container *ngFor="let item of vAreas;let i=index">
                   <option value="{{vAreas[i]}}">{{vAreas[i]}}</option>
                 </ng-container>
@@ -118,7 +118,7 @@
               <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect02"><i class="ni ni-hat-3"></i>&nbsp;&nbsp;&nbsp;Titulación</label>
               </div>
-              <select class="custom-select" id="inputGroupSelect02"  name="titulation" [(ngModel)]=model.titulation required>
+              <select class="custom-select" id="inputGroupSelect02"  name="titulation" [(ngModel)]=model.leadModel.titulation required>
                 <ng-container *ngFor="let item of vTitulations;let i=index">
                   <option value="{{vTitulations[i]}}">{{vTitulations[i]}}</option>
                 </ng-container>

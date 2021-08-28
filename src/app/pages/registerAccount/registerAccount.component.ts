@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Account } from 'src/app/salesforce/Account.model';
 import { HttpClient} from "@angular/common/http";
 import { accessToken } from 'src/app/salesforce/auth';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registerAccount',
@@ -11,15 +10,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class RegisterAccountComponent implements OnInit {
 
-  model = new Account(this.http, this.sanitizer);
+  model = new Account(this.http);
 
   public s;
 
   public vTypes:string[] = []; 
   public vIndustries:string[] = []; 
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
-  //
+  constructor(private http: HttpClient) { }
+  
   ngOnInit() {
     this.getTypes();
     this.getIndustries();

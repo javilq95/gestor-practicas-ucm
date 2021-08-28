@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { accessToken, currentType } from 'src/app/salesforce/auth';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Account } from 'src/app/salesforce/Account.model';
+import { accessToken } from 'src/app/salesforce/auth';
+import { Lead } from 'src/app/salesforce/Lead.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,31 +11,44 @@ import { accessToken, currentType } from 'src/app/salesforce/auth';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-
+  public s;
   public vAreas:string[] = []; 
   public vTitulations:string[] = []; 
   public vTypes:string[] = []; 
   public vIndustries:string[] = []; 
-  public s;
-  public currentType = "Account";
+  public accountUser = new Account(this.http);
+  public leadUser = new Lead(this.http);
+  public currentType = sessionStorage.getItem('currentType');
+  public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  public secureLogo;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    if(currentType == sessionStorage.getItem('currentType')){
-    this.getAreas();
-    this.getTitulations();
-    }
-    if(currentType == "Area"){
-    this.getAreas();
-    this.getTypes();
-    this.getIndustries();
+    switch (this.currentType) {
+      case "Lead":
+        this.leadUser.loginLeadSF(this.currentUser.email, this.currentUser.password);
+        this.getAreas();
+        this.getTitulations();
+        break;
+      case "Account":
+        this.accountUser.loginAccountSF(this.currentUser.email, this.currentUser.password);
+        this.secureLogo = this.sanitizer.bypassSecurityTrustResourceUrl(this.currentUser.logo.substring(13, 141).replace('&amp;', '&').replace('&amp;', '&'));
+        this.getTypes();
+        this.getIndustries();
+        break;
+      case "Contact":
+        console.log("It is a Tuesday.");
+        break;
+      default:
+        console.log("Tipo erróneo");
+        break;
     }
   }
 
   public async getAreas (){
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/" + currentType + "/picklist-values/012000000000000AAA/Area__c";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/" + this.currentType + "/picklist-values/012000000000000AAA/Area__c";
 
     await this.http.get<any>(
           endPoint,
@@ -55,7 +71,7 @@ export class UserProfileComponent implements OnInit {
 
   public async getTitulations (){
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/" + currentType + "/picklist-values/012000000000000AAA/Titulation__c";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v48.0/ui-api/object-info/" + this.currentType + "/picklist-values/012000000000000AAA/Titulation__c";
 
     await this.http.get<any>(
           endPoint,
