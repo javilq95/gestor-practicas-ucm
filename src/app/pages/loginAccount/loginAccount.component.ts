@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Account } from 'src/app/salesforce/Account.model';
 
 @Component({
@@ -13,7 +14,11 @@ export class LoginAccountComponent implements OnInit, OnDestroy {
   public modelPassword = '';
   model = new Account(this.http);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  public redirection(){
+    return this.router.navigate(['/user-profile']);
+  }
 
   ngOnInit() {
   }

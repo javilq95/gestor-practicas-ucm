@@ -21,6 +21,7 @@ export class ContactModel {
 export class Contact {
   public s: string = null;
   public error: string = null;
+  public logged: boolean = null;
   public contactModel: ContactModel = new ContactModel();
   constructor(
     public http: HttpClient
@@ -39,7 +40,8 @@ export class Contact {
       'Phone': this.contactModel.phone,
       'MobilePhone': this.contactModel.mobilePhone,
       'mailingCity': this.contactModel.mailingCity,
-      'AccountId': this.contactModel.accountId
+      'AccountId': this.contactModel.accountId,
+      'Mark__c': this.contactModel.mark
     };
     return this.http.post<any>(
       'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact',
@@ -82,11 +84,14 @@ export class Contact {
       this.contactModel.phone = parsed.records[0].Phone;
       this.contactModel.mailingCity = parsed.records[0].MailingCity;
       this.contactModel.accountId = parsed.records[0].AccountId;
+      this.contactModel.mark = parsed.records[0].Mark__c;
       await this.getOpportunitySF();
       sessionStorage.setItem('currentUser', JSON.stringify(this.contactModel));
       sessionStorage.setItem('currentType', 'Contact');
+      this.logged = true;
     } else {
       this.error = "ERROR, credenciales incorrectas o alumno no verificado";
+      this.logged = false;
     }
   }
 
@@ -107,7 +112,8 @@ export class Contact {
     var parsed = JSON.parse(this.s);
 
     if(parsed.totalSize > 0){
-      this.contactModel.opportunityId = parsed.records[0].Id;
+      console.log(parsed.records[0].OpportunityId);
+      this.contactModel.opportunityId = parsed.records[0].OpportunityId;
     }
   }
 

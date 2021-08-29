@@ -301,10 +301,161 @@
                     </div>
                   </div>
                 </div>
-                <div class="pl-lg-4">
+                <div class="pl-lg-0">
                   <div class="form-group">
                     <label class="form-control-label" for="input-description">Descripción</label>
                     <textarea rows="4" class="form-control form-control-alternative" name="description" [(ngModel)]=accountUser.accountModel.description required>{{currentUser.description}} </textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- CONTACT -->
+<div *ngIf="currentType==='Contact'">
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">¡Hola {{currentUser.firstName}}!</h1>
+          <p class="text-white mt-0 mb-5">Esta es tu página de perfil. En ella podrás modificar casi todos los campos asociados a tu usuario.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <a href="javascript:void(0)">
+                  <img src="assets/img/theme/student.png" class="rounded-circle">
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="row">
+              <div class="col">
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h3>
+                {{currentUser.firstName}} {{currentUser.lastName}}<span class="font-weight-light"></span>
+              </h3>
+              <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i>{{currentUser.mailingCity}}
+              </div>
+              <div class="h5 mt-4">
+                <i class="ni business_briefcase-24 mr-2"></i>{{currentType}}
+              </div>
+              <div>
+                <i class="ni education_hat mr-2"></i>Universidad Complutense de Madrid
+              </div>
+              <hr class="my-4" />
+              <p>{{currentUser.titulation}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Mi cuenta</h3>
+              </div>
+              <div class="col-4 text-right">
+                <a href="#!" class="btn btn-sm btn-primary">Guardar cambios</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">Información personal</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-firstname">Nombre</label>
+                      <input type="text" id="input-firstname" class="form-control form-control-alternative" value="{{currentUser.firstName}}" name="firstName" [(ngModel)]=contactUser.contactModel.firstName required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-lastname">Apellidos</label>
+                      <input type="text" id="input-lastname" class="form-control form-control-alternative" value="{{currentUser.lastName}}" name="lastName" [(ngModel)]=contactUser.contactModel.lastName required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-first-nif">NIF</label>
+                      <input type="text" id="input-first-nif" class="form-control form-control-alternative" value="{{currentUser.nif}}" name="nif" [(ngModel)]=contactUser.contactModel.nif required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-last-email">Email</label>
+                      <input type="email" id="input-email" class="form-control form-control-alternative" value="{{currentUser.email}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-first-address">Dirección</label>
+                      <input type="text" id="input-address" class="form-control form-control-alternative" value="{{currentUser.mailingCity}}" name="city" [(ngModel)]=contactUser.contactModel.mailingCity required>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-last-phone">Teléfono</label>
+                      <input type="text" id="input-phone" class="form-control form-control-alternative" value="{{currentUser.phone}}" name="phone" [(ngModel)]=contactUser.contactModel.phone required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <!-- Address -->
+              <h6 class="heading-small text-muted mb-4">Información académica</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-area">Área</label>
+                      <select class="custom-select" id="inputGroupSelect02" type="text" name="area" [(ngModel)]=contactUser.contactModel.area required>
+                        <option selected>{{currentUser.area}}</option>
+                        <ng-container *ngFor="let item of vAreas;let i=index">
+                          <option value="{{vAreas[i]}}">{{vAreas[i]}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-titulation">Titulación</label>
+                      <select class="custom-select" id="inputGroupSelect02" type="text" name="titulation" [(ngModel)]=contactUser.contactModel.titulation required>
+                        <option selected>{{currentUser.titulation}}</option>
+                        <ng-container *ngFor="let item of vTitulations;let i=index">
+                          <option value="{{vTitulations[i]}}">{{vTitulations[i]}}</option>
+                        </ng-container>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>

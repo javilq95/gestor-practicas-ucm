@@ -59,7 +59,7 @@
               </div>
             </div>
             <div *ngIf="model.logged; else loggedOut">
-              <span (onload)="redirection()"></span>
+              <span [load]="redirection()"></span>
             </div>
             <ng-template #loggedOut>
               <div *ngIf="model.error">

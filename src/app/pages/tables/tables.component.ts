@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Account } from 'src/app/salesforce/Account.model';
+import { Contact } from 'src/app/salesforce/contact.model';
 import { Lead } from 'src/app/salesforce/Lead.model';
 import { Opportunity } from 'src/app/salesforce/opportunity.model';
 
@@ -19,10 +20,11 @@ export class TablesComponent implements OnInit {
   public vAccountAreaOpportunity: Account[] = [];
   //CONTACT
   public accountContact = new Account(this.http);
-  public opportunityContact = new Opportunity(this.http);
+  public opportunityContact;
   //LOGIN
   public accountUser = new Account(this.http);
   public leadUser = new Lead(this.http);
+  public contactUser = new Contact(this.http);
   public currentType = sessionStorage.getItem('currentType');
   public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   public secureLogo;
@@ -63,7 +65,9 @@ export class TablesComponent implements OnInit {
         }
         break;
       case "Contact":
-        console.log("It is a Tuesday.");
+        this.contactUser.loginContactSF(this.currentUser.email, this.currentUser.password);
+        this.accountContact.getAccount(this.currentUser.accountId);
+        this.opportunityContact = new Opportunity(this.http, this.currentUser.opportunityId);
         break;
       default:
         console.log("Tipo erróneo");

@@ -67,6 +67,19 @@
               </div>
             </div>
 
+            <div *ngIf="model.accountModel.password != null; else nullPassword">
+              <div *ngIf="model.accountModel.password.length > 8; else long">
+                <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
+              </div>
+              <ng-template #long>
+                <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-danger font-weight-700">Insufiente</span></small></div>
+              </ng-template>
+            </div>
+            <ng-template #nullPassword>
+              <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-danger font-weight-700">Insufiente</span></small></div>
+            </ng-template>
+            <br/>
+
             <div class="form-group">
               <div class="input-group input-group-alternative mb-3">
                 <div class="input-group-prepend">
@@ -152,7 +165,7 @@
               </select><p style="color:red;">*</p>
             </div>
 
-            <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
+            
             <div class="row my-4">
               <div class="col-12">
                 <div class="custom-control custom-control-alternative custom-checkbox">

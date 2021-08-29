@@ -1,3 +1,243 @@
+<div *ngIf="currentType==='Contact'">
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="min-height: 250px; background-image: url(assets/img/theme/fondoucm.png); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-danger opacity-8"></span>
+    <!-- Header container -->
+  </div>
+  <div class="container-fluid mt--9">
+    <div class="row">
+      <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Oferta de la beca</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">Información empresarial</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-nameOp">Nombre de la oferta</label>
+                      <input type="text" id="input-nameOp" class="form-control form-control-alternative"
+                        value="{{opportunityContact.name}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-web">Fecha de cierre</label>
+                      <input type="date" id="input-web" class="form-control form-control-alternative"
+                        value="{{opportunityContact.closeDate}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-type">Tipo</label>
+                      <input type="text" id="input-type" class="form-control form-control-alternative"
+                        value="{{opportunityContact.type}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-area">Área</label>
+                      <input type="text" id="input-area" class="form-control form-control-alternative"
+                        value="{{opportunityContact.area}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-stage">Etapa</label>
+                      <input type="text" id="input-stage" class="form-control form-control-alternative"
+                        value="{{opportunityContact.stageName}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-amount">Salario</label>
+                      <input type="text" id="input-amount" class="form-control form-control-alternative"
+                        value="{{opportunityContact.amount}} €" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-startDate">Fecha de Inicio</label>
+                      <input type="date" id="input-startDate" class="form-control form-control-alternative"
+                        value="{{opportunityContact.startDate}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-endDate">Fecha de Fin</label>
+                      <input type="date" id="input-endDate" class="form-control form-control-alternative"
+                        value="{{opportunityContact.endDate}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-employees">Hora de Inicio</label>
+                      <input type="text" id="input-employees" class="form-control form-control-alternative"
+                        value="{{opportunityContact.startTime}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-revenue">Hora de Fin</label>
+                      <input type="text" id="input-revenue" class="form-control form-control-alternative"
+                        value="{{opportunityContact.endTime}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-days">Total de Días / Semana</label>
+                      <input type="number" id="input-days" class="form-control form-control-alternative"
+                        value="{{opportunityContact.totalDays}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-weekDays">Días de la semana</label>
+                      <input type="text" id="input-weekDays" class="form-control form-control-alternative"
+                        value="{{opportunityContact.weekDays}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-mark">Nota final</label>
+                      <input type="number" id="input-mark" class="form-control form-control-alternative"
+                        value="{{currentUser.mark}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Empresa de la beca</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form>
+              <h6 class="heading-small text-muted mb-4">Información empresarial</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-name">Nombre</label>
+                      <input type="text" id="input-name" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.name}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-web">Sitio web</label>
+                      <input type="text" id="input-web" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.website}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-cif">Número de la empresa</label>
+                      <input type="text" id="input-cif" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.accountNumber}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Teléfono</label>
+                      <input type="text" id="input-phone" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.phone}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Tipo</label>
+                      <input type="text" id="input-type" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.type}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Sector</label>
+                      <input type="text" id="input-type" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.industry}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-city">Dirección</label>
+                      <input type="text" id="input-city" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.billingCity}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-phone">Email</label>
+                      <input type="email" id="input-phone" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.email}}" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-employees">Empleados</label>
+                      <input type="number" id="input-employees" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.numberOfEmployees}}" disabled="disabled">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-revenue">Ingresos anuales</label>
+                      <input type="text" id="input-revenue" class="form-control form-control-alternative"
+                        value="{{accountContact.accountModel.annualRevenue}} €" disabled="disabled">
+                    </div>
+                  </div>
+                </div>
+                <div class="pl-lg-0">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-description">Descripción</label>
+                    <textarea rows="6" class="form-control form-control-alternative"
+                      disabled="disabled">{{accountContact.accountModel.description}} </textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- ACCOUNT -->
 <div *ngIf="currentType==='Account'">
   <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
@@ -41,7 +281,8 @@
           </div>
           <div class="col-xl-4 col-lg-6">
           </div>
-          <div id="bottom"><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-info">Nueva Oferta</a></div>
+          <div id="bottom"><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-info">Nueva
+              Oferta</a></div>
         </div>
       </div>
     </div>
@@ -68,74 +309,86 @@
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let item of vOpportunitiesAccount;let i=index">              
-                <tr>
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                        <img alt="Image placeholder" [src]="secureLogo">
-                      </a>
-                      <div *ngIf="currentUser.totalOpportunities>0">
-                        <div class="media-body">
-                          <span class="mb-0 text-sm">{{vOpportunitiesAccount[i].name}}</span>
+                <ng-container *ngFor="let item of vOpportunitiesAccount;let i=index">
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                          <img alt="Image placeholder" [src]="secureLogo">
+                        </a>
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">{{vOpportunitiesAccount[i].name}}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </th>
-                    <td><div *ngIf="currentUser.totalOpportunities>0">
-                      {{vOpportunitiesAccount[i].amount}} €
-                    </div></td>
-                  <td>
-                    <div *ngIf="currentUser.totalOpportunities>0">
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> {{vOpportunitiesAccount[i].stageName}}
-                    </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="avatar-group">
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-                      </a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
+                    </th>
+                    <td>
                       <div *ngIf="currentUser.totalOpportunities>0">
-                      <span class="mr-2">{{vOpportunitiesAccount[i].probability}}%</span>
+                        {{vOpportunitiesAccount[i].amount}} €
                       </div>
+                    </td>
+                    <td>
                       <div *ngIf="currentUser.totalOpportunities>0">
-                      <div>
-                        <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesAccount[i].probability + '%;'"></div>
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-warning"></i> {{vOpportunitiesAccount[i].stageName}}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="avatar-group">
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                          data-original-title="Ryan Tompson">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg"
+                            class="rounded-circle">
+                        </a>
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                          data-original-title="Romina Hadid">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg"
+                            class="rounded-circle">
+                        </a>
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                          data-original-title="Alexander Smith">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg"
+                            class="rounded-circle">
+                        </a>
+                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                          data-original-title="Jessica Doe">
+                          <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg"
+                            class="rounded-circle">
+                        </a>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <span class="mr-2">{{vOpportunitiesAccount[i].probability}}%</span>
                         </div>
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
+                                aria-valuemin="0" aria-valuemax="100"
+                                [style]="'width:' + vOpportunitiesAccount[i].probability + '%;'"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td class="text-right">
-                    <div ngbDropdown placement="bottom-right">
-                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)">Action</a>
-                        <a class="dropdown-item" href="javascript:void(0)">Another action</a>
-                        <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                    </td>
+                    <td class="text-right">
+                      <div ngbDropdown placement="bottom-right">
+                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                          <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                          <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>
@@ -143,59 +396,60 @@
       </div>
     </div>
   </div>
-  </div>
-  <!-- LEAD -->
-  <div *ngIf="currentType==='Lead'">
-<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-  <div class="container-fluid">
-    <div class="header-body">
-      <!-- Card stats -->
-      <div class="row">
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Candidato</h5>
-                  <span class="h2 font-weight-bold mb-0">{{currentUser.firstName}} {{currentUser.lastName}}</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-red text-white rounded-circle shadow">
-                    <i class="fas fa-user-graduate"></i>
+</div>
+<!-- LEAD -->
+<div *ngIf="currentType==='Lead'">
+  <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+      <div class="header-body">
+        <!-- Card stats -->
+        <div class="row">
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Candidato</h5>
+                    <span class="h2 font-weight-bold mb-0">{{currentUser.firstName}} {{currentUser.lastName}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                      <i class="fas fa-user-graduate"></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Ofertas inscritas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunities}}</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
-                    <i class="fas fa-briefcase"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Ofertas inscritas</h5>
+                    <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunities}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-orange text-white rounded-circle shadow">
+                      <i class="fas fa-briefcase"></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-3 col-lg-6">
-          <div class="card card-stats mb-4 mb-xl-0">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Ofertas abiertas</h5>
-                  <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunitiesArea}}</span>
-                </div>
-                <div class="col-auto">
-                  <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                    <i class="fas fa-business-time"></i>
+          <div class="col-xl-3 col-lg-6">
+            <div class="card card-stats mb-4 mb-xl-0">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h5 class="card-title text-uppercase text-muted mb-0">Ofertas abiertas</h5>
+                    <span class="h2 font-weight-bold mb-0">{{currentUser.totalOpportunitiesArea}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                      <i class="fas fa-business-time"></i>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -205,92 +459,14 @@
       </div>
     </div>
   </div>
-</div>
-<!-- Page content -->
-<div class="container-fluid mt--7">
-  <!-- TABLA OFERTAS INSCRITAS -->
-  <div class="row mt-5">
-    <div class="col">
-      <div class="card bg-default shadow">
-        <div class="card-header bg-transparent border-0">
-          <h3 class="text-white mb-0">Lista de Ofertas en las que estás inscrit@</h3>
-        </div>
-        <div class="table-responsive">
-          <table class="table align-items-center table-dark table-flush">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Nombre de la oferta</th>
-                <th scope="col">Importe</th>
-                <th scope="col">Etapa</th>
-                <th scope="col">Empresa</th>
-                <th scope="col">Avance</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <ng-container *ngFor="let item of vOpportunitiesLead;let i=index">              
-              <tr>
-                <th scope="row">
-                  <div class="media align-items-center">
-                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                      <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
-                    </a>
-                    <div *ngIf="currentUser.totalOpportunities>0">
-                      <div class="media-body">
-                        <span class="mb-0 text-sm">{{vOpportunitiesLead[i].name}}</span>
-                      </div>
-                    </div>
-                  </div>
-                </th>
-                  <td><div *ngIf="currentUser.totalOpportunities>0">
-                    {{vOpportunitiesLead[i].amount}} €
-                  </div></td>
-                <td>
-                  <div *ngIf="currentUser.totalOpportunities>0">
-                  <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
-                  </span>
-                  </div>
-                </td>
-                <td>
-                  <div *ngIf="currentUser.totalOpportunities>0">
-                  <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
-                  </span>
-                  </div>
-                </td>
-                <td>
-                  <div class="d-flex align-items-center">
-                    <div *ngIf="currentUser.totalOpportunities>0">
-                    <span class="mr-2">{{vOpportunitiesLead[i].probability}}%</span>
-                    </div>
-                    <div *ngIf="currentUser.totalOpportunities>0">
-                    <div>
-                      <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesLead[i].probability + '%;'"></div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td class="text-right">
-                  <div ngbDropdown placement="bottom-right">
-                    <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
-                      <i class="fas fa-ellipsis-v"></i>
-                    </a>
-                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                      <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
-                      <a class="dropdown-item" href="javascript:void(0)">Desinscribirse</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </ng-container>
-            </tbody>
-          </table>
-          <!-- TABLA OFERTAS POR ÁREA -->
+  <!-- Page content -->
+  <div class="container-fluid mt--7">
+    <!-- TABLA OFERTAS INSCRITAS -->
+    <div class="row mt-5">
+      <div class="col">
+        <div class="card bg-default shadow">
           <div class="card-header bg-transparent border-0">
-            <h3 class="text-white mb-0">Lista de Ofertas abiertas en base a tu área</h3>
+            <h3 class="text-white mb-0">Lista de Ofertas en las que estás inscrit@</h3>
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-dark table-flush">
@@ -299,86 +475,181 @@
                   <th scope="col">Nombre de la oferta</th>
                   <th scope="col">Importe</th>
                   <th scope="col">Etapa</th>
-                  <th scope="col">Candidatos</th>
+                  <th scope="col">Empresa</th>
                   <th scope="col">Avance</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                <ng-container *ngFor="let item of vOpportunitiesAreaLead;let i=index">              
-                <tr>
-                  <th scope="row">
-                    <div class="media align-items-center">
-                      <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                        <img alt="Image placeholder" src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
-                      </a>
-                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
-                        <div class="media-body">
-                          <span class="mb-0 text-sm">{{vOpportunitiesAreaLead[i].name}}</span>
+                <ng-container *ngFor="let item of vOpportunitiesLead;let i=index">
+                  <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                          <img alt="Image placeholder"
+                            src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
+                        </a>
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <div class="media-body">
+                            <span class="mb-0 text-sm">{{vOpportunitiesLead[i].name}}</span>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </th>
-                    <td><div *ngIf="currentUser.totalOpportunitiesArea>0">
-                      {{vOpportunitiesAreaLead[i].amount}} €
-                    </div></td>
-                  <td>
-                    <div *ngIf="currentUser.totalOpportunitiesArea>0">
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i> {{vOpportunitiesAreaLead[i].stageName}}
-                    </span>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="avatar-group">
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Ryan Tompson">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Romina Hadid">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Alexander Smith">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip" data-original-title="Jessica Doe">
-                        <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg" class="rounded-circle">
-                      </a>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="d-flex align-items-center">
-                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
-                      <span class="mr-2">{{vOpportunitiesAreaLead[i].probability}}%</span>
+                    </th>
+                    <td>
+                      <div *ngIf="currentUser.totalOpportunities>0">
+                        {{vOpportunitiesLead[i].amount}} €
                       </div>
-                      <div *ngIf="currentUser.totalOpportunitiesArea>0">
-                      <div>
-                        <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" [style]="'width:' + vOpportunitiesAreaLead[i].probability + '%;'"></div>
+                    </td>
+                    <td>
+                      <div *ngIf="currentUser.totalOpportunities>0">
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="currentUser.totalOpportunities>0">
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-warning"></i> {{vOpportunitiesLead[i].stageName}}
+                        </span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <span class="mr-2">{{vOpportunitiesLead[i].probability}}%</span>
                         </div>
+                        <div *ngIf="currentUser.totalOpportunities>0">
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
+                                aria-valuemin="0" aria-valuemax="100"
+                                [style]="'width:' + vOpportunitiesLead[i].probability + '%;'"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td class="text-right">
-                    <div ngbDropdown placement="bottom-right">
-                      <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
-                        <i class="fas fa-ellipsis-v"></i>
-                      </a>
-                      <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                        <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
-                        <a class="dropdown-item" (click)=leadUser.insertOpportunityLeadSF(vOpportunitiesAreaLead[i].id) href="javascript:void(0)">Inscribirse</a>
+                    </td>
+                    <td class="text-right">
+                      <div ngbDropdown placement="bottom-right">
+                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                          <a class="dropdown-item" href="javascript:void(0)">Desinscribirse</a>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              </ng-container>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
+            <!-- TABLA OFERTAS POR ÁREA -->
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-white mb-0">Lista de Ofertas abiertas en base a tu área</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Nombre de la oferta</th>
+                    <th scope="col">Importe</th>
+                    <th scope="col">Etapa</th>
+                    <th scope="col">Candidatos</th>
+                    <th scope="col">Avance</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let item of vOpportunitiesAreaLead;let i=index">
+                    <tr>
+                      <th scope="row">
+                        <div class="media align-items-center">
+                          <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                            <img alt="Image placeholder"
+                              src="https://wam-dev-ed--c.documentforce.com/servlet/rtaImage?eid=0010900000aPU7S&amp;feoid=00N0900000ESQTj&amp;refid=0EM090000006AHE">
+                          </a>
+                          <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                            <div class="media-body">
+                              <span class="mb-0 text-sm">{{vOpportunitiesAreaLead[i].name}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </th>
+                      <td>
+                        <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                          {{vOpportunitiesAreaLead[i].amount}} €
+                        </div>
+                      </td>
+                      <td>
+                        <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                          <span class="badge badge-dot mr-4">
+                            <i class="bg-warning"></i> {{vOpportunitiesAreaLead[i].stageName}}
+                          </span>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="avatar-group">
+                          <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                            data-original-title="Ryan Tompson">
+                            <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg"
+                              class="rounded-circle">
+                          </a>
+                          <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                            data-original-title="Romina Hadid">
+                            <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg"
+                              class="rounded-circle">
+                          </a>
+                          <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                            data-original-title="Alexander Smith">
+                            <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg"
+                              class="rounded-circle">
+                          </a>
+                          <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                            data-original-title="Jessica Doe">
+                            <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg"
+                              class="rounded-circle">
+                          </a>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                            <span class="mr-2">{{vOpportunitiesAreaLead[i].probability}}%</span>
+                          </div>
+                          <div *ngIf="currentUser.totalOpportunitiesArea>0">
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100"
+                                  [style]="'width:' + vOpportunitiesAreaLead[i].probability + '%;'"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-right">
+                        <div ngbDropdown placement="bottom-right">
+                          <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                            <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                            <a class="dropdown-item"
+                              (click)=leadUser.insertOpportunityLeadSF(vOpportunitiesAreaLead[i].id)
+                              href="javascript:void(0)">Inscribirse</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-</div>
-
-  

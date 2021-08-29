@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Account } from 'src/app/salesforce/Account.model';
 import { accessToken } from 'src/app/salesforce/auth';
+import { Contact } from 'src/app/salesforce/contact.model';
 import { Lead } from 'src/app/salesforce/Lead.model';
 
 @Component({
@@ -18,6 +19,7 @@ export class UserProfileComponent implements OnInit {
   public vIndustries:string[] = []; 
   public accountUser = new Account(this.http);
   public leadUser = new Lead(this.http);
+  public contactUser = new Contact(this.http);
   public currentType = sessionStorage.getItem('currentType');
   public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   public secureLogo;
@@ -38,7 +40,9 @@ export class UserProfileComponent implements OnInit {
         this.getIndustries();
         break;
       case "Contact":
-        console.log("It is a Tuesday.");
+        this.contactUser.loginContactSF(this.currentUser.email, this.currentUser.password);
+        this.getAreas();
+        this.getTitulations();
         break;
       default:
         console.log("Tipo erróneo");

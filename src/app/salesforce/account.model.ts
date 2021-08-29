@@ -24,6 +24,7 @@ export class AccountModel {
 export class Account {
   public s: string = null;
   public error: string = null;
+  public logged: boolean = null;
   public accountModel: AccountModel = new AccountModel();
   constructor(
     public http: HttpClient
@@ -120,13 +121,14 @@ export class Account {
       this.accountModel.numberOfEmployees = parsed.records[0].NumberOfEmployees;
       this.accountModel.billingCity = parsed.records[0].BillingCity;
       this.accountModel.logo = parsed.records[0].Logo__c;
+      await this.getOpportunities();
+      sessionStorage.setItem('currentUser', JSON.stringify(this.accountModel));
+      sessionStorage.setItem('currentType', 'Account');
+      this.logged = true;
     } else {
       this.error = "ERROR, credenciales incorrectas o empresa no verificada";
+      this.logged = false;
     }
-
-    await this.getOpportunities();
-    sessionStorage.setItem('currentUser', JSON.stringify(this.accountModel));
-    sessionStorage.setItem('currentType', 'Account');
   }
 
   public async getOpportunities() {
@@ -156,7 +158,7 @@ export class Account {
 
   public async getAccount(id: string) {
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Id='"+this.accountModel.id +"'";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Id='"+ id +"'";
 
     await this.http.get<any>(
       endPoint,

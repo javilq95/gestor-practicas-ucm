@@ -14,11 +14,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   public modelPassword = '';
   model = new Lead(this.http);
 
+  constructor(private http: HttpClient, private router: Router) { }
+
   public redirection(){
     return this.router.navigate(['/user-profile']);
   }
-
-  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
