@@ -121,7 +121,7 @@ export class Account {
       this.accountModel.billingCity = parsed.records[0].BillingCity;
       this.accountModel.logo = parsed.records[0].Logo__c;
     } else {
-      this.error = "Error, los credenciales no son correctas o el alumno está verificado";
+      this.error = "ERROR, credenciales incorrectas o empresa no verificada";
     }
 
     await this.getOpportunities();
@@ -154,7 +154,42 @@ export class Account {
     }
   }
 
+  public async getAccount(id: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+Email__c+,+Password__c+,+Phone+,+Description+,+Type+,+Industry+,+AnnualRevenue+,+Website+,+AccountNumber,+NumberOfEmployees+,+BillingCity+,+Logo__c+FROM+Account+WHERE+Id='"+this.accountModel.id +"'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if (parsed.totalSize > 0) {
+      this.accountModel.id = parsed.records[0].Id;
+      this.accountModel.name = parsed.records[0].Name;
+      this.accountModel.email = parsed.records[0].Email__c;
+      this.accountModel.password = parsed.records[0].Password__c;
+      this.accountModel.phone = parsed.records[0].Phone;
+      this.accountModel.description = parsed.records[0].Description;
+      this.accountModel.type = parsed.records[0].Type;
+      this.accountModel.industry = parsed.records[0].Industry;
+      this.accountModel.annualRevenue = parsed.records[0].AnnualRevenue;
+      this.accountModel.website = parsed.records[0].Website;
+      this.accountModel.accountNumber = parsed.records[0].AccountNumber;
+      this.accountModel.numberOfEmployees = parsed.records[0].NumberOfEmployees;
+      this.accountModel.billingCity = parsed.records[0].BillingCity;
+      this.accountModel.logo = parsed.records[0].Logo__c;
+    }
+  }
+
   get currentAccount() {
     return JSON.stringify(this);
   }
+  
 }

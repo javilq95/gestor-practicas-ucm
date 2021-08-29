@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Lead } from 'src/app/salesforce/Lead.model';
 
 @Component({
@@ -13,14 +14,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   public modelPassword = '';
   model = new Lead(this.http);
 
-  constructor(private http: HttpClient) {}
+  public redirection(){
+    return this.router.navigate(['/user-profile']);
+  }
+
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
-  
+
   ngOnDestroy() {
   }
-
-  //sessionStorage.setItem('currentUser', JSON.stringify(user));
 
 }

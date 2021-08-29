@@ -22,6 +22,7 @@ export class Lead {
 
   public s: string = null;
   public error: string = null;
+  public logged: boolean = null;
   public leadModel: LeadModel = new LeadModel();
 
   constructor(
@@ -112,13 +113,15 @@ export class Lead {
       this.leadModel.titulation = parsed.records[0].Titulation__c;
       this.leadModel.phone = parsed.records[0].Phone;
       this.leadModel.city = parsed.records[0].City;
+      await this.getOpportunities();
+      await this.getOpportunitiesArea();
+      sessionStorage.setItem('currentUser', JSON.stringify(this.leadModel));
+      sessionStorage.setItem('currentType', 'Lead');
+      this.logged = true;
     } else {
-      this.error = "Error, los credenciales no son correctas o el alumno está verificado";
+      this.error = "ERROR, credenciales incorrectas o alumno no verificado";
+      this.logged = false;
     }
-    await this.getOpportunities();
-    await this.getOpportunitiesArea();
-    sessionStorage.setItem('currentUser', JSON.stringify(this.leadModel));
-    sessionStorage.setItem('currentType', 'Lead');
   }
 
   public async getOpportunities() {
@@ -190,16 +193,4 @@ export class Lead {
       }).toPromise().then(x => this.s = JSON.stringify(x));
   }
 
-  public resetObject() {
-    this.leadModel.id = null;
-    this.leadModel.firstName = null;
-    this.leadModel.lastName = null;
-    this.leadModel.email = null;
-    this.leadModel.password = null;
-    this.leadModel.nif = null;
-    this.leadModel.area = null;
-    this.leadModel.titulation = null;
-    this.leadModel.phone = null;
-    this.leadModel.city = null;
-  }
 }

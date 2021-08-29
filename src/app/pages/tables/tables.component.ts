@@ -11,11 +11,16 @@ import { Opportunity } from 'src/app/salesforce/opportunity.model';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-
+  //LEAD
   public vOpportunitiesAccount: Opportunity[] = [];
   public vOpportunitiesLead: Opportunity[] = [];
   public vOpportunitiesAreaLead: Opportunity[] = [];
-
+  public vAccountOpportunity: Account[] = [];
+  public vAccountAreaOpportunity: Account[] = [];
+  //CONTACT
+  public accountContact = new Account(this.http);
+  public opportunityContact = new Opportunity(this.http);
+  //LOGIN
   public accountUser = new Account(this.http);
   public leadUser = new Lead(this.http);
   public currentType = sessionStorage.getItem('currentType');
@@ -33,11 +38,17 @@ export class TablesComponent implements OnInit {
         if (this.currentUser.totalOpportunities > 0) {
           for (var _i = 0; _i < this.currentUser.totalOpportunities; _i++) {
             this.vOpportunitiesLead[_i] = new Opportunity(this.http, this.currentUser.vOpportunities[_i]);
+            //this.vAccountOpportunity[_i] = new Account(this.http);
+            //this.vAccountOpportunity[_i].getAccount(this.vOpportunitiesAreaLead[_i].accountId)
           }
         }
         if (this.currentUser.totalOpportunitiesArea > 0) {
           for (var _i = 0; _i < this.currentUser.totalOpportunitiesArea; _i++) {
             this.vOpportunitiesAreaLead[_i] = new Opportunity(this.http, this.currentUser.vOpportunitiesArea[_i]);
+            // this.vAccountAreaOpportunity[_i] = new Account(this.http);
+            // this.vAccountAreaOpportunity[_i].getAccount(this.vOpportunitiesAreaLead[_i].accountId);
+            // var prueba = this.vAccountAreaOpportunity[_i].accountModel.logo as string;
+            // this.vAccountAreaOpportunity[_i].accountModel.logo = this.sanitizer.bypassSecurityTrustResourceUrl(prueba.substring(13, 141).replace('&amp;', '&').replace('&amp;', '&'));
           }
         }
         break;

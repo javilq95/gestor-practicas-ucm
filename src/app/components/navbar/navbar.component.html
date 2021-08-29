@@ -20,10 +20,26 @@
         <a class="nav-link pr-0" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
-              <img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
+              <div *ngIf="currentType==='Account'">
+                <img alt="Image placeholder" src="assets/img/theme/business.png">
+              </div>
+              <div *ngIf="currentType==='Lead'">
+                <img alt="Image placeholder" src="assets/img/theme/student.png">
+              </div>
+              <div *ngIf="currentType==='Contact'">
+                <img alt="Image placeholder" src="assets/img/theme/student.png">
+              </div>
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+              <div *ngIf="currentType==='Account'">              
+                <span class="mb-0 text-sm  font-weight-bold">{{currentUser.name}}</span>
+              </div>
+              <div *ngIf="currentType==='Lead'">              
+                <span class="mb-0 text-sm  font-weight-bold">{{currentUser.firstName}}</span>
+              </div>
+              <div *ngIf="currentType==='Contact'">              
+                <span class="mb-0 text-sm  font-weight-bold">{{currentUser.firstName}}</span>
+              </div>
             </div>
           </div>
         </a>
@@ -44,7 +60,7 @@
             <span>Soporte</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#!" class="dropdown-item">
+          <a (click) = "logOut()" class="dropdown-item">
             <i class="ni ni-user-run"></i>
             <span>Cerrar sesión</span>
           </a>
