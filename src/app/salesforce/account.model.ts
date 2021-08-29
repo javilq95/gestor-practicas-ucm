@@ -25,6 +25,7 @@ export class Account {
   public s: string = null;
   public error: string = null;
   public logged: boolean = null;
+  public registerErrors: string[] = [];
   public accountModel: AccountModel = new AccountModel();
   constructor(
     public http: HttpClient
@@ -48,7 +49,9 @@ export class Account {
       'BillingCity': this.accountModel.billingCity,
       'Logo__c': this.accountModel.logo
     };
-    return this.http.post<any>(
+    var parsed = null;
+
+    await this.http.post<any>(
       'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/account',
       body,
       {
@@ -58,7 +61,9 @@ export class Account {
           'Access-Control-Allow-Methods': 'POST',
           'Content-Type': 'application/json'
         }
-      }).toPromise().then(x => this.s = JSON.stringify(x));
+      }).toPromise().then(x => parsed = x, (error: any) => this.registerErrors = error.error);
+
+      this.logged = (parsed != null);
   }
 
   public async updateAccountSF() {

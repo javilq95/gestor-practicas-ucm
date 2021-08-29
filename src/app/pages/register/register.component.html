@@ -75,9 +75,9 @@
                 <input class="form-control" placeholder="Clave" type="password" name="password" id="password" [(ngModel)]=model.leadModel.password required><p style="color:red;">*</p>
               </div>
             </div>
-            
+
             <div *ngIf="model.leadModel.password != null; else nullPassword">
-              <div *ngIf="model.leadModel.password.length > 8; else long">
+              <div *ngIf="model.leadModel.password.length > 7; else long">
                 <div class="text-muted font-italic"><small>Seguridad de la contraseña: <span class="text-success font-weight-700">Fuerte</span></small></div>
               </div>
               <ng-template #long>
@@ -137,6 +137,21 @@
                 </ng-container>
               </select><p style="color:red;">*</p>
             </div>
+
+            <div *ngIf="model.logged; else loggedOut">
+              <div class="alert alert-success" role="alert">
+                <a>Cuenta registrada con éxito. No podrás hacer login hasta que el gestor de prácticas verifique tu cuenta. Recibirás un mail cuando esto ocurra. ¡Muchas gracias!</a>
+              </div>
+            </div>
+            <ng-template #loggedOut>
+              <div *ngIf="model.registerErrors">
+                <ng-container *ngFor="let item of model.registerErrors;let i=index">
+                  <div class="alert alert-danger" role="alert">
+                    <a>{{model.registerErrors[i].message}}</a>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
             
             <div class="row my-4">
               <div class="col-12">
@@ -155,9 +170,5 @@
         </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="model.s">
-    <h2> Modelo: </h2>
-    {{model.s}}
   </div>
 </div>

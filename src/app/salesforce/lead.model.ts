@@ -22,6 +22,7 @@ export class Lead {
 
   public s: string = null;
   public error: string = null;
+  public registerErrors: string[] = [];
   public logged: boolean = null;
   public leadModel: LeadModel = new LeadModel();
 
@@ -43,7 +44,9 @@ export class Lead {
       'City': this.leadModel.city,
       'Company': 'Universidad Complutense de Madrid',
     };
-    return this.http.post<any>(
+    var parsed = null;
+
+    await this.http.post<any>(
       'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/lead',
       body,
       {
@@ -53,7 +56,10 @@ export class Lead {
           'Access-Control-Allow-Methods': 'POST',
           'Content-Type': 'application/json'
         }
-      }).toPromise().then(x => this.s = JSON.stringify(x));
+      }).toPromise().then(x => parsed = x, (error: any) => this.registerErrors = error.error);
+
+      this.logged = (parsed != null);
+
   }
 
   public async updateLeadSF() {
