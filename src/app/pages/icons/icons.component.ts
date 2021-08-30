@@ -13,6 +13,8 @@ export class IconsComponent implements OnInit {
   ngOnInit() {
   }
 
+  //https://psucm-developer-edition.eu40.force.com/sign
+
   //https://wam-dev-ed--signature.visualforce.com/apex/Signature
   //https://wam-dev-ed.lightning.force.com/lightning/n/signature__Sign
 }
