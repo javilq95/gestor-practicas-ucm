@@ -3,8 +3,10 @@ import { accessToken } from "./auth";
 
 export class Opportunity {
   public s;
-  public vLeads:string[] = []; 
+  public vLeads: string[] = [];
   public totalLeads: number = null;
+  public registerErrors: string[] = [];
+  public isInsert: boolean;
   constructor(
     public http: HttpClient,
     public id: string = null,
@@ -23,15 +25,15 @@ export class Opportunity {
     public area: string = null,
     public accountId: string = null
   ) {
-    if (id != null){
+    if (id != null) {
       this.getOpportunitySF();
       this.getLeadsSF();
     }
   }
 
   public async insertOpportunitySF() {
-
-    var weekDaysSF = this.weekDays.join(';');
+    if (this.weekDays != null)
+      var weekDaysSF = this.weekDays.join(';');
 
     var body = {
       'Name': this.name,
@@ -49,7 +51,9 @@ export class Opportunity {
       'EndDate__c': this.endDate,
       'Area__c': this.area
     };
-    return this.http.post<any>(
+    var parsed = null;
+
+    await this.http.post<any>(
       'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/opportunity',
       body,
       {
@@ -59,7 +63,9 @@ export class Opportunity {
           'Access-Control-Allow-Methods': 'POST',
           'Content-Type': 'application/json'
         }
-      }).toPromise().then(x => this.s = JSON.stringify(x));
+      }).toPromise().then(x => parsed = x, (error: any) => this.registerErrors = error.error);
+
+    this.isInsert = (parsed != null);
   }
 
   public async getOpportunitySF() {

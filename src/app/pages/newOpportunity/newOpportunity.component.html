@@ -80,6 +80,22 @@
                 </div>
               </div>
             </div>
+
+            <div *ngIf="model.isInsert; else insertOut">
+              <div class="alert alert-success" role="alert">
+                <a>Oferta publicada con éxito.</a>
+              </div>
+            </div>
+            <ng-template #insertOut>
+              <div *ngIf="model.registerErrors">
+                <ng-container *ngFor="let item of model.registerErrors;let i=index">
+                  <div class="alert alert-danger" role="alert">
+                    <a>{{model.registerErrors[i].message}}</a>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-template>
+
             <hr class="my-4" />
             <!-- Detalles -->
             <h6 class="heading-small text-muted mb-4">Detalles de la práctica</h6>

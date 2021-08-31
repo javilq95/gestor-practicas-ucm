@@ -39,8 +39,8 @@ export class NavbarComponent implements OnInit {
   }
 
   public logOut() {
-    sessionStorage.setItem('currentUser', '');
-    sessionStorage.setItem('currentType', '');
+    sessionStorage.setItem('currentUser', null);
+    sessionStorage.setItem('currentType', null);
   }
 
 }

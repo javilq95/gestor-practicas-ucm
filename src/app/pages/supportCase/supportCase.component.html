@@ -51,6 +51,11 @@
                 </div>
               </div>
             </div>
+            <div *ngIf="model.message">
+              <div class="alert alert-success" role="alert" style="text-align:center">
+                <a style="text-align:center">{{model.message}}</a>
+              </div>
+            </div>
           </form>
         </div>
       </div>

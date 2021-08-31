@@ -15,6 +15,7 @@ export class NewOpportunityComponent implements OnInit {
   public vTypes:string[] = []; 
   public vStages:string[] = []; 
   public s;
+  public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +23,7 @@ export class NewOpportunityComponent implements OnInit {
     this.getAreas();
     this.getTypes();
     this.getStages();
+    this.model.accountId = this.currentUser.id;
   }
 
   public async getAreas (){
