@@ -25,10 +25,6 @@ export class Opportunity {
     public area: string = null,
     public accountId: string = null
   ) {
-    if (id != null) {
-      this.getOpportunitySF();
-      this.getLeadsSF();
-    }
   }
 
   public async insertOpportunitySF() {
@@ -68,9 +64,9 @@ export class Opportunity {
     this.isInsert = (parsed != null);
   }
 
-  public async getOpportunitySF() {
+  public async getOpportunitySF(id: string) {
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+Id='" + this.id + "'";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+StageName+,+CloseDate+,+Type+,+Amount+,+Probability+,+WeekDays__c+,+TotalDays__c+,+StartTime__c+,+EndTime__c,+StartDate__c+,+EndDate__c+,+Area__c+,+AccountId+FROM+Opportunity+WHERE+Id='" + id + "'";
 
     await this.http.get<any>(
       endPoint,
@@ -83,7 +79,8 @@ export class Opportunity {
       }).toPromise().then(x => this.s = JSON.stringify(x));
 
     var parsed = JSON.parse(this.s);
-
+    
+    this.id = parsed.records[0].Id;
     this.name = parsed.records[0].Name;
     this.stageName = parsed.records[0].StageName;
     this.closeDate = parsed.records[0].CloseDate;
@@ -100,9 +97,10 @@ export class Opportunity {
     this.accountId = parsed.records[0].AccountId;
   }
 
-  public async getLeadsSF() {
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Opportunity__c='" + this.id + "'";
+  public async getLeadsSF(id: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Opportunity__c='" + id + "'";
 
     await this.http.get<any>(
       endPoint,

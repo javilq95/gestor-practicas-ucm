@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { Account } from 'src/app/salesforce/Account.model';
 import { accessToken } from 'src/app/salesforce/auth';
 
 // core components
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
   public dateLeads;
   public sizeContacts: number = null;
   public dateContacts;
+  public vAccount: Account[] = [];
   public sizeAccounts: number = null;
   public dateAccounts;
   public sizeOpportunities: number = null;
@@ -69,7 +71,6 @@ export class DashboardComponent implements OnInit {
     this.getOpportunities();
     
   }
-
 
   public updateOptions() {
     this.salesChart.data.datasets[0].data = this.data;
@@ -124,7 +125,7 @@ export class DashboardComponent implements OnInit {
 
   public async getAccounts (){
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+CreatedDate+FROM+Account+ORDER+BY+CreatedDate+DESC";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+Name+,+CreatedDate+FROM+Account+ORDER+BY+CreatedDate+DESC";
 
     await this.http.get<any>(
           endPoint,
@@ -141,6 +142,10 @@ export class DashboardComponent implements OnInit {
     this.sizeAccounts = parsed.totalSize;
 
     if(this.sizeAccounts> 0){
+      for (var _i = 0; _i < this.sizeAccounts; _i++) {
+        this.vAccount[_i] = new Account(this.http);
+        this.vAccount[_i].getAccount(parsed.records[_i].Id);
+      }
       this.dateAccounts = parsed.records[0].CreatedDate.substring(0,10);
     }
   }

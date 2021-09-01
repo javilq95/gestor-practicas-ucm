@@ -95,6 +95,32 @@ export class Contact {
     }
   }
 
+  public async updateContactSF() {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v52.0/sobjects/Contact/" + this.contactModel.id;
+
+    var body = {
+      'FirstName': this.contactModel.firstName,
+      'LastName': this.contactModel.lastName,
+      'NIF__c': this.contactModel.nif,
+      'Area__c': this.contactModel.area,
+      'Titulation__c': this.contactModel.titulation,
+      'Phone': this.contactModel.phone,
+      'MailingCity': this.contactModel.mailingCity
+    };
+    return this.http.patch<any>(
+      endPoint,
+      body,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'PATCH',
+          'Content-Type': 'application/json'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+  }
+
   public async getOpportunitySF() {
 
     var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+OpportunityId+FROM+OpportunityContactRole+WHERE+ContactId='" + this.contactModel.id + "'";
@@ -112,7 +138,6 @@ export class Contact {
     var parsed = JSON.parse(this.s);
 
     if(parsed.totalSize > 0){
-      console.log(parsed.records[0].OpportunityId);
       this.contactModel.opportunityId = parsed.records[0].OpportunityId;
     }
   }

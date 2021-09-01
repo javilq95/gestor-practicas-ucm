@@ -1,4 +1,5 @@
 import { HttpClient } from "@angular/common/http";
+import { ParsedEvent } from "@angular/compiler";
 import { accessToken } from "./auth";
 
 export class LeadModel {
@@ -21,6 +22,8 @@ export class LeadModel {
 export class Lead {
 
   public s: string = null;
+  public messageIns: string = null;
+  public messageDes: string = null;
   public error: string = null;
   public registerErrors: string[] = [];
   public logged: boolean = null;
@@ -58,7 +61,7 @@ export class Lead {
         }
       }).toPromise().then(x => parsed = x, (error: any) => this.registerErrors = error.error);
 
-      this.logged = (parsed != null);
+    this.logged = (parsed != null);
 
   }
 
@@ -186,7 +189,8 @@ export class Lead {
       'Lead__c': this.leadModel.id,
       'Opportunity__c': opportunityId
     };
-    return this.http.post<any>(
+
+    await this.http.post<any>(
       'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/OpportunityLead__c/',
       body,
       {
@@ -197,6 +201,40 @@ export class Lead {
           'Content-Type': 'application/json'
         }
       }).toPromise().then(x => this.s = JSON.stringify(x));
+
+      this.messageIns = "Te has inscrito en esta oferta, esta operación puede tardar unos segundos. Refresca la página en unos segundos para ver los cambios.";
+  }
+
+  public async deleteOpportunityLeadSF(opportunityId: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FROM+OpportunityLead__C+WHERE+Opportunity__c='" + opportunityId + "'+AND+Lead__c='" + this.leadModel.id + "'";
+    
+    var parsed = null;
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => parsed = x);
+
+    var endPointDelete = 'https://wam-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/OpportunityLead__c/' + parsed.records[0].Id;
+
+    await this.http.delete<any>(
+      endPointDelete,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'DELETE',
+          'Content-Type': 'application/json'
+        }
+      }).toPromise().then();
+
+      this.messageDes = "Te has desinscrito de esta oferta, esta operación puede tardar unos segundos. Refresca la página en unos segundos para ver los cambios.";
   }
 
 }
