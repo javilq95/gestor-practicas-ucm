@@ -34,6 +34,7 @@ export class TablesComponent implements OnInit {
   public currentType = sessionStorage.getItem('currentType');
   public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
   public secureLogo;
+  public details = null;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 
@@ -100,5 +101,15 @@ export class TablesComponent implements OnInit {
         this.vLeadOpportunity[_i].getLeadSF(this.vOpportunitiesAccount[index].vLeads[_i]);
       }
     }
+  }
+
+  public detailsOpp(index: number){
+    this.opportunityContact = this.vOpportunitiesLead[index];
+    this.details = true;
+  }
+
+  public detailsOppArea(index: number){
+    this.opportunityContact = this.vOpportunitiesAreaLead[index];
+    this.details = true;
   }
 }

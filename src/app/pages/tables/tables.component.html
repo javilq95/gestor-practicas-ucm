@@ -519,8 +519,10 @@
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="javascript:void(0)">Detalles</a>
-                            <a class="dropdown-item" (click)=leadUser.deleteOpportunityLeadSF(vOpportunitiesLead[i].id)
+                            <a class="dropdown-item" 
+                            (click)=detailsOpp(i) href="javascript:void(0)">Detalles</a>
+                            <a class="dropdown-item" 
+                            (click)=leadUser.deleteOpportunityLeadSF(vOpportunitiesLead[i].id)
                               href="javascript:void(0)">Desinscribirse</a>
                           </div>
                         </div>
@@ -591,7 +593,8 @@
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="javascript:void(0)">Detalles</a>
+                            <a class="dropdown-item"
+                            (click)=detailsOppArea(i) href="javascript:void(0)">Detalles</a>
                             <a class="dropdown-item"
                               (click)=leadUser.insertOpportunityLeadSF(vOpportunitiesAreaLead[i].id)
                               href="javascript:void(0)">Inscribirse</a>
@@ -608,4 +611,111 @@
       </div>
     </div>
   </div>
+  <div *ngIf="details==true">
+    <br/>
+    <div class="card-body">
+    <form>
+      <div class="pl-lg-4">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-nameOp">Nombre de la oferta</label>
+              <input type="text" id="input-nameOp" class="form-control form-control-alternative"
+                value="{{opportunityContact.name}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-web">Fecha de cierre</label>
+              <input type="date" id="input-web" class="form-control form-control-alternative"
+                value="{{opportunityContact.closeDate}}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-type">Tipo</label>
+              <input type="text" id="input-type" class="form-control form-control-alternative"
+                value="{{opportunityContact.type}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-area">Área</label>
+              <input type="text" id="input-area" class="form-control form-control-alternative"
+                value="{{opportunityContact.area}}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-stage">Etapa</label>
+              <input type="text" id="input-stage" class="form-control form-control-alternative"
+                value="{{opportunityContact.stageName}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-amount">Salario</label>
+              <input type="text" id="input-amount" class="form-control form-control-alternative"
+                value="{{opportunityContact.amount}} €" disabled="disabled">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-startDate">Fecha de Inicio</label>
+              <input type="date" id="input-startDate" class="form-control form-control-alternative"
+                value="{{opportunityContact.startDate}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-endDate">Fecha de Fin</label>
+              <input type="date" id="input-endDate" class="form-control form-control-alternative"
+                value="{{opportunityContact.endDate}}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-employees">Hora de Inicio</label>
+              <input type="text" id="input-employees" class="form-control form-control-alternative"
+                value="{{opportunityContact.startTime}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-revenue">Hora de Fin</label>
+              <input type="text" id="input-revenue" class="form-control form-control-alternative"
+                value="{{opportunityContact.endTime}}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-days">Total de Días / Semana</label>
+              <input type="number" id="input-days" class="form-control form-control-alternative"
+                value="{{opportunityContact.totalDays}}" disabled="disabled">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="input-weekDays">Días de la semana</label>
+              <input type="text" id="input-weekDays" class="form-control form-control-alternative"
+                value="{{opportunityContact.weekDays}}" disabled="disabled">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+  
 </div>
