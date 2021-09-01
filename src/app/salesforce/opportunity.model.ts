@@ -23,7 +23,8 @@ export class Opportunity {
     public startDate: string = null,
     public endDate: string = null,
     public area: string = null,
-    public accountId: string = null
+    public accountId: string = null,
+    public contactId: string = null
   ) {
   }
 
@@ -100,7 +101,7 @@ export class Opportunity {
 
   public async getLeadsSF(id: string) {
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Opportunity__c='" + id + "'";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Lead__c+FROM+OpportunityLead__C+WHERE+Opportunity__c='" + id + "'";
 
     await this.http.get<any>(
       endPoint,
@@ -120,6 +121,27 @@ export class Opportunity {
       for (var _i = 0; _i < this.totalLeads; _i++) {
         this.vLeads[_i] = parsed.records[_i].Lead__c;
       }
+    }
+  }
+
+  public async getContactSF(id: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+ContactId+FROM+OpportunityContactRole+WHERE+OpportunityId='" + id + "'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if(parsed.totalSize > 0){
+      this.contactId = parsed.records[0].ContactId;
     }
   }
 

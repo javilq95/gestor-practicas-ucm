@@ -281,8 +281,8 @@
           </div>
           <div class="col-xl-4 col-lg-6">
           </div>
-          <div id="bottom"><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-info">Nueva
-              Oferta</a></div>
+          <div id="bottom"><a routerLinkActive="active" [routerLink]="['/newOpportunity']" class="btn btn-primary">
+              Nueva Oferta</a></div>
         </div>
       </div>
     </div>
@@ -296,101 +296,95 @@
           <div class="card-header bg-transparent border-0">
             <h3 class="text-white mb-0">Lista de Ofertas</h3>
           </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-dark table-flush">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">Nombre de la oferta</th>
-                  <th scope="col">Importe</th>
-                  <th scope="col">Etapa</th>
-                  <th scope="col">Candidatos</th>
-                  <th scope="col">Avance</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let item of vOpportunitiesAccount;let i=index">
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" [src]="secureLogo">
-                        </a>
-                        <div *ngIf="currentUser.totalOpportunities>0">
-                          <div class="media-body">
-                            <span class="mb-0 text-sm">{{vOpportunitiesAccount[i].name}}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-                    <td>
-                      <div *ngIf="currentUser.totalOpportunities>0">
-                        {{vOpportunitiesAccount[i].amount}} €
-                      </div>
-                    </td>
-                    <td>
-                      <div *ngIf="currentUser.totalOpportunities>0">
-                        <span class="badge badge-dot mr-4">
-                          <i class="bg-warning"></i> {{vOpportunitiesAccount[i].stageName}}
-                        </span>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="avatar-group">
-                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
-                          data-original-title="Ryan Tompson">
-                          <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg"
-                            class="rounded-circle">
-                        </a>
-                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
-                          data-original-title="Romina Hadid">
-                          <img alt="Image placeholder" src="../assets/img/theme/team-2-800x800.jpg"
-                            class="rounded-circle">
-                        </a>
-                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
-                          data-original-title="Alexander Smith">
-                          <img alt="Image placeholder" src="../assets/img/theme/team-3-800x800.jpg"
-                            class="rounded-circle">
-                        </a>
-                        <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
-                          data-original-title="Jessica Doe">
-                          <img alt="Image placeholder" src="../assets/img/theme/team-4-800x800.jpg"
-                            class="rounded-circle">
-                        </a>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <div *ngIf="currentUser.totalOpportunities>0">
-                          <span class="mr-2">{{vOpportunitiesAccount[i].probability}}%</span>
-                        </div>
-                        <div *ngIf="currentUser.totalOpportunities>0">
-                          <div>
-                            <div class="progress">
-                              <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
-                                aria-valuemin="0" aria-valuemax="100"
-                                [style]="'width:' + vOpportunitiesAccount[i].probability + '%;'"></div>
+          <div *ngIf="currentUser.totalOpportunities>0">
+            <div *ngIf="vLeadOpportunity.length==0; else leads">
+              <div class="table-responsive">
+
+                <table class="table align-items-center table-dark table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Nombre de la oferta</th>
+                      <th scope="col">Candidatos</th>
+                      <th scope="col">Becario elegido</th>
+                      <th scope="col">Etapa</th>
+                      <th scope="col">Avance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let item of vOpportunitiesAccount && vContactAccount;let i=index">
+                      <tr>
+                        <th scope="row">
+                          <div class="media align-items-center">
+                            <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                              <img alt="Image placeholder" [src]="secureLogo">
+                            </a>
+                            <div class="media-body">
+                              <span class="mb-0 text-sm">{{vOpportunitiesAccount[i].name}}</span>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-right">
-                      <div ngbDropdown placement="bottom-right">
-                        <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                          <a class="dropdown-item" href="javascript:void(0)">Action</a>
-                          <a class="dropdown-item" href="javascript:void(0)">Another action</a>
-                          <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </ng-container>
-              </tbody>
-            </table>
+                        </th>
+                        <td>
+                          <div id="bottom"><a (click)="getLeads(i)" class="btn btn-outline-primary">Ver</a></div>
+                        </td>
+                        <td>
+                          {{vContactAccount[i].contactModel.firstName}} {{vContactAccount[i].contactModel.lastName}}
+                        </td>
+                        <td>
+                          <span class="badge badge-dot mr-4">
+                            <i class="bg-warning"></i> {{vOpportunitiesAccount[i].stageName}}
+                          </span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <span class="mr-2">{{vOpportunitiesAccount[i].probability}}%</span>
+                            <div>
+                              <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60"
+                                  aria-valuemin="0" aria-valuemax="100"
+                                  [style]="'width:' + vOpportunitiesAccount[i].probability + '%;'"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <ng-template #leads>
+              <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">Nombre del candidato</th>
+                      <th scope="col">Titulacion</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Teléfono</th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let item of vLeadOpportunity;let i=index">
+                      <tr>
+                        <td>
+                          {{vLeadOpportunity[i].leadModel.firstName}} {{vLeadOpportunity[i].leadModel.lastName}}
+                        </td>
+                        <td>
+                          {{vLeadOpportunity[i].leadModel.titulation}}
+                        </td>
+                        <td>
+                          {{vLeadOpportunity[i].leadModel.email}}
+                        </td>
+                        <td>
+                          {{vLeadOpportunity[i].leadModel.phone}}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
@@ -468,12 +462,12 @@
           <div class="card-header bg-transparent border-0">
             <h3 class="text-white mb-0">Lista de Ofertas en las que estás inscrit@</h3>
           </div>
-            <div *ngIf="leadUser.messageDes">
-              <div class="alert alert-primary" role="alert" style="text-align:center">
-                <a style="text-align:center">{{leadUser.messageDes}}</a>
-              </div>
+          <div *ngIf="leadUser.messageDes">
+            <div class="alert alert-primary" role="alert" style="text-align:center">
+              <a style="text-align:center">{{leadUser.messageDes}}</a>
             </div>
-          
+          </div>
+
           <div *ngIf="currentUser.totalOpportunities>0">
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">
@@ -525,7 +519,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Detalles</a>
                             <a class="dropdown-item" (click)=leadUser.deleteOpportunityLeadSF(vOpportunitiesLead[i].id)
                               href="javascript:void(0)">Desinscribirse</a>
                           </div>
@@ -597,7 +591,7 @@
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
                           <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="javascript:void(0)">Ver más</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Detalles</a>
                             <a class="dropdown-item"
                               (click)=leadUser.insertOpportunityLeadSF(vOpportunitiesAreaLead[i].id)
                               href="javascript:void(0)">Inscribirse</a>
@@ -614,3 +608,4 @@
       </div>
     </div>
   </div>
+</div>

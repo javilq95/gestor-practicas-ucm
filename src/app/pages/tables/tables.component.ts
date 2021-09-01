@@ -17,10 +17,13 @@ export class TablesComponent implements OnInit {
   public vOpportunitiesAccount: Opportunity[] = [];
   public vOpportunitiesLead: Opportunity[] = [];
   public vOpportunitiesAreaLead: Opportunity[] = [];
+  //ACCOUNT
   public vAccountOpportunity: Account[] = [];
   public vAccountAreaOpportunity: Account[] = [];
+  public vLeadOpportunity: Lead[] = [];
   public secureLogos: SafeResourceUrl[] = [];
   public secureLogosArea: SafeResourceUrl[] = [];
+  public vContactAccount: Contact[] = [];
   //CONTACT
   public accountContact = new Account(this.http);
   public opportunityContact;
@@ -66,8 +69,12 @@ export class TablesComponent implements OnInit {
         if (this.currentUser.totalOpportunities > 0) {
           for (var _i = 0; _i < this.currentUser.totalOpportunities; _i++) {
             this.vOpportunitiesAccount[_i] = new Opportunity(this.http);
-            this.vOpportunitiesAccount[_i].getOpportunitySF(this.currentUser.vOpportunities[_i]);
-
+            await this.vOpportunitiesAccount[_i].getOpportunitySF(this.currentUser.vOpportunities[_i]);
+            await this.vOpportunitiesAccount[_i].getContactSF(this.currentUser.vOpportunities[_i]);
+            this.vContactAccount[_i] = new Contact(this.http);
+            if (this.vOpportunitiesAccount[_i].contactId) {
+              this.vContactAccount[_i].getContactSF(this.vOpportunitiesAccount[_i].contactId);
+            }
           }
         }
         break;
@@ -80,6 +87,18 @@ export class TablesComponent implements OnInit {
       default:
         console.log("Tipo erróneo");
         break;
+    }
+  }
+
+  public async getLeads(index: number) {
+
+    await this.vOpportunitiesAccount[index].getLeadsSF(this.vOpportunitiesAccount[index].id);
+    if (this.vOpportunitiesAccount[index].totalLeads > 0) {
+      for (var _i = 0; _i < this.vOpportunitiesAccount[index].totalLeads; _i++) {
+
+        this.vLeadOpportunity[_i] = new Lead(this.http);
+        this.vLeadOpportunity[_i].getLeadSF(this.vOpportunitiesAccount[index].vLeads[_i]);
+      }
     }
   }
 }

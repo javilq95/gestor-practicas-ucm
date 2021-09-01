@@ -121,6 +121,36 @@ export class Contact {
       }).toPromise().then(x => this.s = JSON.stringify(x));
   }
 
+  public async getContactSF(id: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+FirstName+,+LastName+,+Email+,+Password__c+,+NIF__c+,+Area__c+,+Titulation__c+,+Phone+,+MailingCity+FROM+Contact+WHERE+Id='" + id + "'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if (parsed.totalSize == 1) {
+      this.contactModel.id = parsed.records[0].Id;
+      this.contactModel.firstName = parsed.records[0].FirstName;
+      this.contactModel.lastName = parsed.records[0].LastName;
+      this.contactModel.email = parsed.records[0].Email;
+      this.contactModel.password = parsed.records[0].Password__c;
+      this.contactModel.nif = parsed.records[0].NIF__c;
+      this.contactModel.area = parsed.records[0].Area__c;
+      this.contactModel.titulation = parsed.records[0].Titulation__c;
+      this.contactModel.phone = parsed.records[0].Phone;
+      this.contactModel.mailingCity = parsed.records[0].City;
+    }
+  }
+
   public async getOpportunitySF() {
 
     var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+OpportunityId+FROM+OpportunityContactRole+WHERE+ContactId='" + this.contactModel.id + "'";

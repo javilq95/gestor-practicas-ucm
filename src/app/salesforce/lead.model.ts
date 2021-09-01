@@ -133,6 +133,36 @@ export class Lead {
     }
   }
 
+  public async getLeadSF(id: string) {
+
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+FirstName+,+LastName+,+Email+,+Password__c+,+NIF__c+,+Area__c+,+Titulation__c+,+Phone+,+City+,+Company+FROM+Lead+WHERE+Id='" + id + "'";
+
+    await this.http.get<any>(
+      endPoint,
+      {
+        headers: {
+          'Authorization': accessToken,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET'
+        }
+      }).toPromise().then(x => this.s = JSON.stringify(x));
+
+    var parsed = JSON.parse(this.s);
+
+    if (parsed.totalSize == 1) {
+      this.leadModel.id = parsed.records[0].Id;
+      this.leadModel.firstName = parsed.records[0].FirstName;
+      this.leadModel.lastName = parsed.records[0].LastName;
+      this.leadModel.email = parsed.records[0].Email;
+      this.leadModel.password = parsed.records[0].Password__c;
+      this.leadModel.nif = parsed.records[0].NIF__c;
+      this.leadModel.area = parsed.records[0].Area__c;
+      this.leadModel.titulation = parsed.records[0].Titulation__c;
+      this.leadModel.phone = parsed.records[0].Phone;
+      this.leadModel.city = parsed.records[0].City;
+    }
+  }
+
   public async getOpportunities() {
 
     var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Opportunity__c+FROM+OpportunityLead__C+WHERE+Lead__c='" + this.leadModel.id + "'";
