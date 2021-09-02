@@ -1,16 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
 import { Account } from 'src/app/salesforce/Account.model';
 import { accessToken } from 'src/app/salesforce/auth';
-
-// core components
-import {
-  chartOptions,
-  parseOptions,
-  chartExample1,
-  chartExample2
-} from "../../variables/charts";
+import { Contact } from 'src/app/salesforce/contact.model';
+import { Lead } from 'src/app/salesforce/Lead.model';
+import { Opportunity } from 'src/app/salesforce/opportunity.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -34,47 +28,51 @@ export class DashboardComponent implements OnInit {
   public dateAccounts;
   public sizeOpportunities: number = null;
   public dateOpportunities;
+  public vOpportunities: Opportunity[] = [];
+  public currentType = sessionStorage.getItem('currentType');
+  public currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+  public accountUser = new Account(this.http);
+  public leadUser = new Lead(this.http);
+  public contactUser = new Contact(this.http);
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    switch (this.currentType) {
+      case "Lead":
+        this.leadUser.loginLeadSF(this.currentUser.email, this.currentUser.password);
 
-    this.datasets = [
-      [0, 20, 10, 30, 15, 40, 20, 60, 60],
-      [0, 20, 5, 25, 10, 30, 15, 40, 40]
-    ];
-    this.data = this.datasets[0];
-
-
-    var chartOrders = document.getElementById('chart-orders');
-
-    parseOptions(Chart, chartOptions());
-
-
-    var ordersChart = new Chart(chartOrders, {
-      type: 'bar',
-      options: chartExample2.options,
-      data: chartExample2.data
-    });
-
-    var chartSales = document.getElementById('chart-sales');
-
-    this.salesChart = new Chart(chartSales, {
-			type: 'line',
-			options: chartExample1.options,
-			data: chartExample1.data
-		});
+        if (this.currentUser.totalOpportunities > 0) {
+          for (var _i = 0; _i < this.currentUser.totalOpportunities; _i++) {
+            this.vOpportunities[_i] = new Opportunity(this.http);
+            this.vOpportunities[_i].getOpportunitySF(this.currentUser.vOpportunities[_i]);
+          }
+        }
+        break;
+      case "Account":
+        this.accountUser.loginAccountSF(this.currentUser.email, this.currentUser.password);
+        if (this.currentUser.totalOpportunities > 0) {
+          for (var _i = 0; _i < this.currentUser.totalOpportunities; _i++) {
+            this.vOpportunities[_i] = new Opportunity(this.http);
+            this.vOpportunities[_i].getOpportunitySF(this.currentUser.vOpportunities[_i]);
+          }
+        }
+        break;
+      case "Contact":
+        this.contactUser.loginContactSF(this.currentUser.email, this.currentUser.password);
+        this.vOpportunities[0] = new Opportunity(this.http);
+        this.vOpportunities[0].getOpportunitySF(this.currentUser.opportunityId);
+        break;
+      default:
+        console.log("Tipo erróneo");
+        break;
+      }
 
     this.getLeads();
     this.getContacts();
     this.getAccounts();
     this.getOpportunities();
     
-  }
-
-  public updateOptions() {
-    this.salesChart.data.datasets[0].data = this.data;
-    this.salesChart.update();
   }
 
   public async getLeads (){
