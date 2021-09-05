@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
 
   public async getOpportunities (){
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+CreatedDate+FROM+Opportunity+ORDER+BY+CreatedDate+DESC";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+,+CreatedDate+FROM+Opportunity+WHERE+IsPrivate=false+ORDER+BY+CreatedDate+DESC";
 
     await this.http.get<any>(
           endPoint,

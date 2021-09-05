@@ -190,7 +190,7 @@ export class Lead {
 
   public async getOpportunitiesArea() {
 
-    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FROM+Opportunity+WHERE+Area__c='" + this.leadModel.area + "'+AND+StageName='Sin Asignar'";
+    var endPoint = "https://wam-dev-ed.my.salesforce.com/services/data/v42.0/query/?q=SELECT+Id+FROM+Opportunity+WHERE+Area__c='" + this.leadModel.area + "'+AND+StageName='Sin Asignar'+AND+IsPrivate=false";
 
     await this.http.get<any>(
       endPoint,
